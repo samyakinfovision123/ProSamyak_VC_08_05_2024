@@ -1,0 +1,78 @@
+input{font-family:Times New Roman; font-size:11pt; color:black;}
+input1{font-family:Times New Roman; font-size:11pt; color:black; bgcolor:red; text-align:right}
+textarea{font-family:Times New Roman; font-size:11pt; color:black}
+select{font-family:Times New Roman; font-size:11pt; color:black;}
+th{font-family:Times New Roman; font-size:11pt; color:black}
+heading1{font-family:Times New Roman; font-size:11pt;
+color:#993300;}
+td{font-family:Times New Roman; font-size:8pt; color:black}
+.td1{font-family:Times New Roman; font-size:8pt; color:black}
+.td10{font-family:Times New Roman; font-size:10pt;font-weight:Bold; color:black}
+.companyhead{font-family:Times New Roman; font-size:18pt; color:black}
+.company_head{font-family:Times New Roman; font-weight:Bold;font-size:12pt; color:black}
+.td2{font-family:Times New Roman; font-size:12pt; color:NAVY; font-weight:bold;}
+.td3{font-family:Times New Roman; font-size:8pt; color:black;}
+.td4{font-family:Times New Roman; font-size:12pt; color:black;}
+.td5{font-family:Times New Roman; font-size:7pt; color:black;}
+.tr1{background:#DAD8C9}
+.th1{font-family:Times New Roman; font-size:11pt;color:'#9F009F';}
+.th4{FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif}
+
+.th2{font-family:Times New Roman; font-size:14pt; color:black}
+.submit1{font-family:Times New Roman; font-size:12pt; font-weight:Bold; color:red}
+.message1{font-family:Times New Roman; font-size:12pt; font-weight:Bold; color:red}
+.star1{font-family:Times New Roman; font-size:10pt; font-weight:bold;color:red}
+.balance{font-family:Times New Roman; font-size:10pt; font-weight:bold;color:blue}
+.button1{color:White; background:#00005B; font-weight:bold; font-size:15; font-family:Garmond; width:135;}
+.button2{color:White; background:#00005B; font-weight:bold; font-size:15; font-family:Garmond; width:200;}
+.button3{color:#002E52; background:#EEEEEE; font-weight:bold; font-size:15; font-family:Garmond; width:200;}
+.hr1{color:red; size:15; }
+.button4{color:white; background:#00005B font-weight:bold; font-size:18; font-family:Garmond; width:135;}
+.button5{color:#002E52; background:#EEEEEE; font-weight:bold; font-size:15; font-family:Garmond; width:50;}
+.msgblue{font-family:Times New Roman;font-size:12pt;color:blue}
+.msgcolor1{font-family:Times New Roman;font-size:12pt;color:red}
+.msgcolor2{font-family:Times New Roman;font-size:12pt;color:blue}
+.dspW {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.stkAV {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-Serif
+}
+
+.dspB{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+
+.dspGB {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #666666; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+
+
+.White{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+
+.black {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-Serif
+}
+.black1{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+
+.gray {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #666666; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+
+H1 { page-break-before: always}
+
+tr.green{background:'#00999';}
+
+
+
+
+
+
+
+
+
+

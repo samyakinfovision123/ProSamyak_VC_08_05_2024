@@ -1,0 +1,20 @@
+
+.bgElem {
+	clear:			both;
+	border:			1px solid rgb( 145, 155, 156 );
+	background:		rgb( 252, 252, 254 );
+	z-index:		2;
+	position:		relative;
+	top:			-2px;
+
+	font:				11px Tahoma;
+	color:				Black;
+
+	filter:			progid:DXImageTransform.Microsoft.Gradient(StartColorStr=#fffcfcfe, EndColorStr=#fff4f3ee, GradientType=0)
+					progid:DXImageTransform.Microsoft.Shadow(Color=#ff919899, Strength=2, Direction=135);
+	
+	/*244, 243, 238*/
+	/* 145, 155, 156*/
+	
+	padding:		2px;
+}

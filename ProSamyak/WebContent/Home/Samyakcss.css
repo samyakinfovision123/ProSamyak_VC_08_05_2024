@@ -1,0 +1,169 @@
+
+/*Default Settings Start */
+input{font-family:Times New Roman; font-size:11pt; color:black;}
+
+.ipinvoice{font-family:Times New Roman; font-size:11pt; color:black; background:#91FC8B}
+.ipstock{font-family:Times New Roman; font-size:11pt; color:black; background:#84FFFF}
+.ipdue{font-family:Times New Roman; font-size:11pt; color:black; background:#FFB3FF}
+
+textarea{font-family:Times New Roman; font-size:11pt; color:black}
+select{font-family:Times New Roman; font-size:11pt; color:black;}
+th{font-family:Times New Roman; font-size:11pt; color:black}
+.thcolor{font-family:Times New Roman; font-size:11pt; color:black; background:'red'; }
+heading1{font-family:Times New Roman; font-size:11pt;
+color:#993300;}
+td{font-family:Times New Roman; font-size:10pt; color:black}
+H1 { page-break-before: always}
+
+/*Default Settings End */
+/*heading, row,hr styles */
+.homeheading{font-family:Monotype corsiva, Arial; font-size:18pt;color:'#FF3E3E';}
+.companyhead{font-family:Times New Roman; font-size:14pt; color:black}
+.hr1{color:red; size:2; }
+.tr1{background:'#CAE0F9';}
+/* td,th styles*/
+.thmar{font-family:Times New Roman; font-size:11pt; color:white; background:'#000033'; }
+.td1{font-family:Times New Roman; font-size:8pt; color:black}
+.td2{font-family:Times New Roman; font-size:12pt; color:NAVY;  background:'white';}
+.td3{font-family:Times New Roman; font-size:12pt; color:black; font-weight:bold; background:'white';}
+.td4{font-family:Times New Roman; font-size:12pt; color:black;}
+.td5{font-family:Times New Roman; font-size:7pt; color:black;}
+.th1{font-family:Times New Roman; font-size:11pt;color:'#9F009F';}
+.th4{font-family:Times New Roman; font-size:11pt;color:'#00005B';}
+.th2{font-family:Times New Roman; font-size:14pt; color:black}
+
+/*message font styles */
+
+.mar{font-family:"Tahoma,technical,arial"; font-size:12pt; font-weight:Bold; color:'#ffffff'}
+.message1{font-family:Times New Roman; font-size:12pt; font-weight:Bold; color:red}
+.star1{font-family:Times New Roman; font-size:10pt; font-weight:bold;color:red}
+.balance{font-family:Times New Roman; font-size:10pt; font-weight:bold;color:blue}
+.msgcolor1{font-family:Times New Roman;font-size:12pt;color:red}
+.msgcolor2{font-family:Times New Roman;font-size:12pt;color:blue}
+.msgred{font-family:Times New Roman;font-size:12pt;color:red}
+.msgblue{font-family:Times New Roman;font-size:12pt;color:blue}
+.submit1{font-family:Times New Roman; font-size:12pt; font-weight:Bold; color:red}
+/* Message font style ends  */
+
+/*Background for Bifurcation  */
+.purimp{ background:#717100 font-size:12pt; font-weight:Bold; color:White}
+.purloc{ background:#974B00 font-size:12pt; font-weight:Bold; color:White}
+
+.salexp{ background:#353F84 font-size:12pt; font-weight:Bold; color:White}
+.salloc{ background:#BD159B font-size:12pt; font-weight:Bold; color:White}
+
+.repurimp{ background:white font-size:12pt; font-weight:Bold; color:#717100}
+.repurloc{ background:white font-size:12pt; font-weight:Bold; color:#974B00}
+
+.resalexp{ background:white font-size:12pt; font-weight:Bold; color:#353F84}
+.resalloc{ background:white font-size:12pt; font-weight:Bold; color:#BD159B}
+
+
+.cgtsale{ background:#888277 font-size:12pt; font-weight:Bold; color:White}
+.cgtpur{ background:#A6A857 font-size:12pt; font-weight:Bold; color:White}
+
+/*Background for Bifurcation  */
+
+/*Report /font Styles */
+.dspW {
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.stkAV {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-Serif
+}
+.dspB{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+.dspGB {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #666666; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+
+.White{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #ffffff; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+
+.black {
+	FONT-SIZE: 12px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-Serif
+}
+.black1{
+	FONT-WEIGHT: bold; FONT-SIZE: 11px; COLOR: #000000; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+
+.gray {
+	FONT-WEIGHT: bold; FONT-SIZE: 12px; COLOR: #666666; FONT-FAMILY: Arial, Helvetica, sans-serif
+}
+
+/* Button , submit styles*/
+/* go button start*/
+.go_bttns {background: #00005B;border-bottom: 2px solid #0A3E55;border-right: 2px solid #104A7B;border-left: 1px solid #FFFFFF;border-top:1px solid #FFFFFF;color:White;height:20px;width=25px;font-family:arial;font-size:11px;text-decoration:none;cursor: hand}
+.iprdonly { background: #FFB366;border-left: 0px;border-right: 0px;border-top: 0px;border-bottom: 0px; color:black;font-size:11px;font-weight:bold;cursor:unavilable}
+.iprdonly1 { background:white ; border-left:1px solid #DEE0E0 ;border-right:1px solid #DEE0E0;border-top: 1px solid #DEE0E0;border-bottom: 1px solid #DEE0E0; color:black;font-size:11px;font-weight:bold;cursor:unavilable}
+
+/* go button end*/
+
+
+/* button1 button start*/
+.button1 {color:white; background:"URL('../Buttons/fwmenu10_169x21_up.gif')"; font-weight:plian; font-size:15; font-family:Times New Roman; width:100;}
+.button1_over {color:'#00005B;'; background:"URL('../Buttons/fwmenu10_169x21_over.gif')"; font-weight:plian; font-size:15; font-family:Times New Roman; width:100;}
+
+/* button1 button end*/
+
+
+/* datebtn button start*/
+.datebtn {color:white; background:"URL('../Buttons/fwmenu10_169x21_up.gif')"; font-weight:Plain; font-size:12; font-family:Times New Roman; width:100;}
+.datebtn_over {color:'#00005B;'; background:"URL('../Buttons/fwmenu10_169x21_over.gif')"; font-weight:Plain; font-size:12; font-family:Times New Roman; width:100;}
+
+/* datebtn button end*/
+
+/* button2 button start*/
+.button2 {color:white; background:"URL('../Buttons/fwmenu10_169x21_up.gif')"; font-weight:plain; font-size:15; font-family:Times New Roman; width:200;}
+.button2_over {color:'#00005B;'; background:"URL('../Buttons/fwmenu10_169x21_over.gif')"; font-weight:plain; font-size:15; font-family:Times New Roman; width:200;}
+
+/* button2 button end*/
+
+
+/* button3 button start*/
+.button3 {color:white; background:"URL('../Buttons/fwmenu10_169x21_up.gif')"; font-weight:plain; font-size:15; font-family:Times New Roman; width:50;}
+.button3_over {color:'#00005B;'; background:"URL('../Buttons/fwmenu10_169x21_over.gif')"; font-weight:plain; font-size:15; font-family:Times New Roman; width:50;}
+
+/* button3 button end*/
+
+/* button4 button start*/
+.button4 {color:white; background:"URL('../Buttons/fwmenu10_169x21_up.gif')"; font-weight:plain; font-size:15; font-family:Times New Roman; width:135;}
+.button4_over {color:'#00005B;'; background:"URL('../Buttons/fwmenu10_169x21_over.gif')"; font-weight:plain; font-size:15; font-family:Times New Roman; width:135;}
+
+/* button4 button end*/
+
+
+
+
+
+/*home page table start*/
+#ht {border-color: yellow ; 
+border-style: groove;	
+border-collapse: collapse;
+border-width: 5px
+}
+#ht td{
+ border-color:  '#80FF80' ; 
+border-style: groove;	
+border-collapse: collapse;
+border-width: 4px}
+
+
+#ht th{
+ border-color: '#80FF80' ; 
+border-style: groove ;	
+border-collapse: collapse;
+border-width: 5px}
+
+/*home page table end*/
+
+
+
+
+
+
+
+
+

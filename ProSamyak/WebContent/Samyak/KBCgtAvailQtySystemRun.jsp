@@ -1,0 +1,189 @@
+<!-- 
+For Run the System Run:-
+
+type the url in the browser 
+http://localhost:8080/Nippon/Samyak/KBCgtAvailQtySystemRun.jsp?command=SamyakKB
+
+This system is for updating the available quantities for consignment sale and purchase for both overseas as well as india module
+-->
+
+
+
+<%@ page language="java" import="java.io.*,java.sql.*,java.util.*,NipponBean.*" errorPage="errorpage.jsp"%>
+
+<jsp:useBean id="L" class="NipponBean.login"/>
+<jsp:useBean id="A" class="NipponBean.Array"/>
+<jsp:useBean id="C" class="NipponBean.Connect"/>
+
+<%
+try{
+String command=request.getParameter("command");
+
+if(command.equals("SamyakKB")){
+	
+	
+ResultSet rs_g= null;
+ResultSet rs_p= null;
+Connection cong = null;
+Connection conp = null;
+PreparedStatement pstmt_g=null;
+PreparedStatement pstmt_p=null;
+   
+try	{
+	cong=C.getConnection();
+	conp=C.getConnection();
+}
+catch(Exception Samyak31)
+{ 
+    out.println("<font color=red> FileName : KBCgtPurchaseAvailQtySystemRun.jsp<br>Bug No Samyak31 : "+ Samyak31);
+}
+
+
+//get all the RT rows which corresponds to the Consignment in the System.
+String query = "SELECT COUNT(*) as rtCount FROM Receive_Transaction RT, Receive R WHERE RT.Receive_Id=R.Receive_Id AND R.Purchase=0 AND R.R_Return=0 AND R.Opening_Stock=0 AND R.StockTransfer_Type=0 AND R.Active=1 and RT.Active=1";
+int rtCount = 0;
+
+pstmt_g = cong.prepareStatement(query);
+rs_g = pstmt_g.executeQuery();
+while(rs_g.next())
+{
+	rtCount = rs_g.getInt("rtCount");
+}
+pstmt_g.close();		
+
+String rtId[] = new String[rtCount];
+String rId[] = new String[rtCount];
+double qty[] = new double[rtCount];
+double oldRejectQty[] = new double[rtCount];
+double originalAvailQty[] = new double[rtCount];
+
+query = "SELECT R.Receive_Id as rId, ReceiveTransaction_Id, Quantity, Rejection_Quantity, Available_Quantity FROM Receive_Transaction RT, Receive R WHERE RT.Receive_Id=R.Receive_Id AND R.Purchase=0 AND R.R_Return=0 AND R.Opening_Stock=0 AND R.StockTransfer_Type=0 AND R.Active=1 and RT.Active=1";
+
+int c=0;
+pstmt_g = cong.prepareStatement(query);
+rs_g = pstmt_g.executeQuery();
+while(rs_g.next())
+{
+	rId[c] = rs_g.getString("rId");
+	rtId[c] = rs_g.getString("ReceiveTransaction_Id");
+	qty[c] = rs_g.getDouble("Quantity");
+	oldRejectQty[c] = rs_g.getDouble("Rejection_Quantity");
+	originalAvailQty[c] = rs_g.getDouble("Available_Quantity");
+	c++;
+}
+pstmt_g.close();		
+
+
+out.print("<table border=1>");
+out.print("<tr>");
+out.print("<td>RT Id</td>");
+out.print("<td>R Id</td>");
+out.print("<td>Quantity</td>");
+out.print("<td>Old Available Quantity</td>");
+out.print("<td>New Available Quantity</td>");
+out.print("</tr>");
+
+for(int i=0; i<rtCount; i++)
+{
+	//get all the consignment confirmed against each RT row as the return rows are already punched while entering the Cgt In entry and then update the Available Quantity accordingly for the India module
+	
+	//for the overseas module the return entry must be considered and used for calculating the available quantity
+
+	String sumquery = "SELECT Quantity AS purchaseSum,  RT.ReceiveTransaction_Id, Rejection_Quantity FROM Receive_Transaction RT, Receive R WHERE RT.Receive_Id=R.Receive_Id AND R.Purchase=1 AND R.R_Return=0 AND R.Opening_Stock=0 AND R.StockTransfer_Type=0 AND RT.Consignment_ReceiveId="+rtId[i]+" AND R.Active=1 and RT.Active=1";
+
+	double purchaseSum=0;
+	double newRejectQty=0;
+	String confirmRT_Id = "";
+	pstmt_g = cong.prepareStatement(sumquery);
+	rs_g = pstmt_g.executeQuery();
+	while(rs_g.next())
+	{
+		purchaseSum = rs_g.getDouble("purchaseSum");
+		confirmRT_Id = rs_g.getString("ReceiveTransaction_Id");
+		newRejectQty = rs_g.getDouble("Rejection_Quantity");
+	}
+	pstmt_g.close();		
+
+	double ghatSum=0;
+	if(! "".equals(confirmRT_Id))
+	{
+		//Also get the ghat entry for the lot
+		sumquery = "SELECT SUM(Quantity) AS ghatSum FROM Receive_Transaction RT, Receive R WHERE RT.Receive_Id=R.Receive_Id AND R.Purchase=1 AND R.Receive_Sell=1 AND R.R_Return=0 AND R.Opening_Stock=0 AND R.StockTransfer_Type=7 AND RT.Consignment_ReceiveId="+confirmRT_Id+" AND R.Active=1 and RT.Active=1";
+
+
+		pstmt_g = cong.prepareStatement(sumquery);
+		rs_g = pstmt_g.executeQuery();
+		while(rs_g.next())
+		{
+			ghatSum = rs_g.getDouble("ghatSum");
+		}
+		pstmt_g.close();	
+	}
+
+	//getting the consignment return entries used in the overseas module
+	String returnquery = "SELECT Quantity AS returnSum FROM Receive_Transaction RT, Receive R WHERE RT.Receive_Id=R.Receive_Id AND R.Purchase=0 AND R.R_Return=1 AND R.Opening_Stock=0 AND R.StockTransfer_Type=0 AND RT.Consignment_ReceiveId="+rtId[i]+" AND R.Active=1 and RT.Active=1";
+
+	double returnSum=0;
+	pstmt_g = cong.prepareStatement(returnquery);
+	rs_g = pstmt_g.executeQuery();
+	while(rs_g.next())
+	{
+		returnSum = rs_g.getDouble("returnSum");
+	}
+	pstmt_g.close();	
+
+
+	double availQty = qty[i] + oldRejectQty[i] - purchaseSum - ghatSum - newRejectQty - returnSum;
+	
+	availQty = str.mathformat(availQty, 3);
+	
+	if(originalAvailQty[i] != availQty)
+	{
+		out.print("<tr>");
+		out.print("<td>"+rtId[i]);
+		out.print("</td>");
+		out.print("<td>"+rId[i]);
+		out.print("</td>");
+		out.print("<td>"+qty[i]);
+		out.print("</td>");
+		out.print("<td>"+originalAvailQty[i]);
+		out.print("</td>");
+		out.print("<td>"+availQty);
+		out.print("</td>");
+		out.print("</tr>");
+		//Update the respective RT row with the available quantity
+		String updateAvailQtyQuery = "UPDATE Receive_Transaction SET Available_Quantity=? WHERE ReceiveTransaction_Id="+rtId[i]+" ";
+
+		pstmt_p = conp.prepareStatement(updateAvailQtyQuery);
+		pstmt_p.setDouble(1, availQty);
+		int a90 = pstmt_p.executeUpdate();
+		pstmt_p.close();		
+	}
+
+}
+out.print("</table>");
+out.print("<br>System Run Completed");
+
+C.returnConnection(conp);
+C.returnConnection(cong);
+
+}
+
+}catch(Exception e)
+  {
+	out.print("<br>The error in file KBCgtAvailQtySystemRun.jsp "+e);
+  }
+%>
+
+
+
+
+
+
+
+
+
+			
+			
+			
+			

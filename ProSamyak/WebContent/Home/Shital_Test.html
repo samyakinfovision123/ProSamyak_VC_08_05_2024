@@ -1,0 +1,480 @@
+
+<html>
+<head>
+<title>Samyak Software</title>
+<link href='../Samyak/Samyakcss.css' rel=stylesheet type='text/css'>
+<meta http-equiv="Content-Type" content="text/html;">
+<script language="JavaScript">
+	function d(str)
+{
+window.open(str,"_blank", ["Top=110","Left=350","Toolbar=no", "Location=0","Menubar=no","Height=530","Width=655", "Resizable=no","Scrollbars=no","status=no"])
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+ var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+   var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+   if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function fwLoadMenus() {
+  if (window.fw_menu_0) return;
+  window.fw_menu_0 = new Menu("root",76,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_0.addMenuItem("Local","window.open('../Inventory/InvReceive.jsp?command=Default&lots=1&purchase=local', 'right');");
+  fw_menu_0.addMenuItem("Import","window.open('../Inventory/InvReceive.jsp?command=Default&lots=1&purchase=import', 'right');");
+  fw_menu_0.addMenuItem("Return","window.open('../Inventory/ReturnPurchase.jsp?command=PurchaseReport&message=masters', 'right');");
+   fw_menu_0.bgImageUp="fwmenu15_76x21_up.gif";
+   fw_menu_0.bgImageOver="fwmenu15_76x21_over.gif";
+   fw_menu_0.fontWeight="bold";
+   fw_menu_0.hideOnMouseOut=true;
+  window.fw_menu_1 = new Menu("root",76,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_1.addMenuItem("Local","window.open('../Inventory/InvSell.jsp?command=Default&lots=1&sale=local', 'right');");
+  fw_menu_1.addMenuItem("Export","window.open('../Inventory/InvSell.jsp?command=Default&lots=1&sale=export', 'right');");
+  fw_menu_1.addMenuItem("Return","window.open('../Inventory/ReturnSale.jsp?command=SaleReport&message=masters', 'right');");
+  fw_menu_1.addMenuItem("Person","window.open('../Master/SalesPerson.jsp?command=Default&message=Default', 'right');")
+   fw_menu_1.bgImageUp="fwmenu14_76x21_up.gif";
+   fw_menu_1.bgImageOver="fwmenu14_76x21_over.gif";
+   fw_menu_1.fontWeight="bold";
+   fw_menu_1.hideOnMouseOut=true;
+  window.fw_menu_2 = new Menu("root",136,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_2.addMenuItem("Purchase","window.open('../Consignment/CgtReceive.jsp?command=Default&lots=1', 'right');");
+  fw_menu_2.addMenuItem("Pruchase Return","window.open('../Consignment/CgtReceiveReturn.jsp?command=Default', 'right');");
+  fw_menu_2.addMenuItem("Sales","window.open('../Consignment/CgtSell.jsp?command=Default&lots=1', 'right');");
+  fw_menu_2.addMenuItem("Sales  Return","window.open('../Consignment/CgtSellReturn.jsp?command=Default', 'right');");
+   fw_menu_2.bgImageUp="fwmenu13_136x21_up.gif";
+   fw_menu_2.bgImageOver="fwmenu13_136x21_over.gif";
+   fw_menu_2.fontWeight="bold";
+   fw_menu_2.hideOnMouseOut=true;
+  window.fw_menu_3 = new Menu("root",145,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_3.addMenuItem("New Diamond",'d("../Master/NewLot.jsp?message=Default")');
+  fw_menu_3.addMenuItem("New Jewelry",'d("../Master/NewJewellary.jsp?command=Default&message=masters")');
+  fw_menu_3.addMenuItem("New Item","window.open('../Inventory/NewItem.jsp?message=masters', 'right');");
+//  fw_menu_3.addMenuItem("Opening Jwelery","window.open('../Master/OpeningStockjewellary.jsp?command=Default&message=masters', 'right');");
+  fw_menu_3.addMenuItem("Stock Transfer","window.open('../Inventory/StockTransfer.jsp?command=Default&lots=1', 'right');");
+   fw_menu_3.bgImageUp="fwmenu12_145x21_up.gif";
+   fw_menu_3.bgImageOver="fwmenu12_145x21_over.gif";
+   fw_menu_3.fontWeight="bold";
+   fw_menu_3.hideOnMouseOut=true;
+  window.fw_menu_4 = new Menu("root",152,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_4.addMenuItem("Add Group","window.open('../Finance/SundryType.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Account","window.open('../Master/NewParty.jsp?message=Default', 'right');");
+  fw_menu_4.addMenuItem("Bank Account","window.open('../Master/NewAccount.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Cash","window.open('../Finance/Cash.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Capital","window.open('../Finance/Capital.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Current Assets","window.open('../Finance/CurrentAsset.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Current Liabilities","window.open('../Finance/CurrentLiabilities.jsp?command=CurrentLiabilities&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Fixed Assets","window.open('../Finance/Assets.jsp?command=newAsset&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Direct Expenses","window.open('../Finance/SundryType.jsp?command=Sundry&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Indirect Expenses","window.open('../Finance/Indirect.jsp?command=Expense&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Indirect Income","window.open('../Finance/Indirect.jsp?command=Income&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Investment","window.open('../Finance/Investment.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Loan Liabilites","window.open('../Finance/Loan.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Loan &amp; Advance","window.open('../Finance/LoanGiven.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Miscellaneous  Exp.","window.open('../Finance/MiscExp.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Reserve &amp; Surplus","window.open('../Finance/CurrentLiabilities.jsp?command=Expense&message=Default', 'right');");
+   fw_menu_4.bgImageUp="fwmenu11_152x21_up.gif";
+   fw_menu_4.bgImageOver="fwmenu11_152x21_over.gif";
+   fw_menu_4.fontWeight="bold";
+   fw_menu_4.hideOnMouseOut=true;
+    window.fw_menu_5_1 = new Menu("Voucher",169,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+    fw_menu_5_1.addMenuItem("Contra   F4","window.open('../Finance/Contra.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Payment   F5","window.open('../Finance/Payment.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Recepit   F6","window.open('../Finance/Receipt.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Sales  Recepit   F8","window.open('../Finance/SalesReceipt1.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Purchase Payment  F9","window.open('../Finance/PurchasePayment1.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Journal  F7","window.open('../Finance/CommonJournal.jsp?command=Default&message=Default', 'right');");
+     fw_menu_5_1.bgImageUp="fwmenu10_169x21_up.gif";
+     fw_menu_5_1.bgImageOver="fwmenu10_169x21_over.gif";
+     fw_menu_5_1.fontWeight="bold";
+     fw_menu_5_1.hideOnMouseOut=true;
+   
+    window.fw_menu_5_3 = new Menu("Promissary Note (PN)",169,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+    fw_menu_5_3.addMenuItem("Receipt","window.open('../Finance/PNReceipt.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_3.addMenuItem("Payment","window.open('../Finance/PNPayment.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_3.addMenuItem("Settelment","window.open('../Report/PNBook.jsp?command=Settle&message=Default', 'right');");
+     fw_menu_5_3.bgImageUp="fwmenu10_169x21_up.gif";
+     fw_menu_5_3.bgImageOver="fwmenu10_169x21_over.gif";
+     fw_menu_5_3.fontWeight="bold";
+     fw_menu_5_3.hideOnMouseOut=true;
+  window.fw_menu_5 = new Menu("root",169,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+    fw_menu_5.addMenuItem("Print Voucher","window.open('../Report/PrintVouchers.jsp?command=print&message=masters', 'right');");
+
+  fw_menu_5.addMenuItem(fw_menu_5_1);
+//  fw_menu_5.addMenuItem(fw_menu_5_2);
+  fw_menu_5.addMenuItem(fw_menu_5_3);
+   fw_menu_5.bgImageUp="fwmenu10_169x21_up.gif";
+   fw_menu_5.bgImageOver="fwmenu10_169x21_over.gif";
+   fw_menu_5.fontWeight="bold";
+   fw_menu_5.hideOnMouseOut=true;
+   fw_menu_5.childMenuIcon="arrows.gif";
+  window.fw_menu_6 = new Menu("root",91,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_6.addMenuItem("Upload","window.open('../Inventory/PictureUploadForm.jsp?message=Default', 'right');");
+  fw_menu_6.addMenuItem("Modify","window.open('../Master/PictureModifyForm.jsp?message=Default', 'right');");
+   fw_menu_6.bgImageUp="fwmenu7_91x21_up.gif";
+   fw_menu_6.bgImageOver="fwmenu7_91x21_over.gif";
+   fw_menu_6.fontWeight="bold";
+   fw_menu_6.hideOnMouseOut=true;
+  window.fw_menu_7 = new Menu("root",142,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_7.addMenuItem("Rap  Matrix","window.open('../Report/RapMatrix.jsp?command=Default', 'right');");
+//  fw_menu_7.addMenuItem("Rap Satock Value","window.open('rap.html', 'right');");
+   fw_menu_7.bgImageUp="fwmenu6_142x21_up.gif";
+   fw_menu_7.bgImageOver="fwmenu6_142x21_over.gif";
+   fw_menu_7.fontWeight="bold";
+   fw_menu_7.hideOnMouseOut=true;
+    window.fw_menu_8_1 = new Menu("Edit ",143,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+    fw_menu_8_1.addMenuItem("User","window.open('../Master/EditUser.jsp?command=edit&message=Default', 'right');");
+    
+    fw_menu_8_1.addMenuItem("Exchang Rate","window.open('../Master/EditLocalCurrency.jsp?command=update&message=masters', 'right');");
+    fw_menu_8_1.addMenuItem("Local Currency","window.open('../Master/EditLocalCurrency.jsp?command=edit&message=masters', 'right');");
+ 	fw_menu_8_1.addMenuItem("Currency","window.open('../Master/EditMasters.jsp?command=Currency&message=masters', 'right');");
+     fw_menu_8_1.bgImageUp="fwmenu9_143x21_up.gif";
+     fw_menu_8_1.bgImageOver="fwmenu9_143x21_over.gif";
+     fw_menu_8_1.fontWeight="bold";
+     fw_menu_8_1.hideOnMouseOut=true;
+  window.fw_menu_8 = new Menu("root",143,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_8.addMenuItem("Add New User","window.open('../Master/NewUser.jsp?message=Default', 'right');");
+  fw_menu_8.addMenuItem(fw_menu_8_1);
+//  fw_menu_8.addMenuItem("Sheduler","window.open('currency.html', 'right');");
+//  fw_menu_8.addMenuItem("Personal Manager","window.open('personal.html', 'right');");
+   fw_menu_8.bgImageUp="fwmenu9_143x21_up.gif";
+   fw_menu_8.bgImageOver="fwmenu9_143x21_over.gif";
+   fw_menu_8.fontWeight="bold";
+   fw_menu_8.hideOnMouseOut=true;
+   fw_menu_8.childMenuIcon="arrows.gif";
+  window.fw_menu_9 = new Menu("root",160,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+/*  fw_menu_9.addMenuItem("Admin Help","window.open('cgt_perchase.html', 'right');");
+  fw_menu_9.addMenuItem("Backup Procedure","window.open('cgt_perchase.html', 'right');");
+  fw_menu_9.addMenuItem("Contact Us","window.open('cgt_perchase.html', 'right');");
+  fw_menu_9.addMenuItem("Crash Recovery","window.open('cgt_perchase.html', 'right');");
+  fw_menu_9.addMenuItem("System Maintenance","location='system.html'");
+   fw_menu_9.bgImageUp="fwmenu8_160x21_up.gif";
+   fw_menu_9.bgImageOver="fwmenu8_160x21_over.gif";
+   fw_menu_9.fontWeight="bold";
+   fw_menu_9.hideOnMouseOut=true;
+   */
+    window.fw_menu_10_1 = new Menu("Consignment",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+    fw_menu_10_1.addMenuItem("Purchase","window.open('../Master/EditCgtPurchase.jsp?command=PurchaseReport&message=masters', 'right');");
+    fw_menu_10_1.addMenuItem("Sales","window.open('../Master/EditCgtSale.jsp?command=SaleReport&message=masters', 'right');");
+     fw_menu_10_1.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_10_1.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_10_1.fontWeight="bold";
+     fw_menu_10_1.hideOnMouseOut=true;
+    window.fw_menu_10_2 = new Menu("Inventory",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+    fw_menu_10_2.addMenuItem("Opening Stock","window.open('../Master/EditOpeningStock.jsp?command=edit&message=Default', 'right');");
+    fw_menu_10_2.addMenuItem("Diamond Lot","window.open('../Master/EditLot.jsp?command=edit&message=Default', 'right');");
+    fw_menu_10_2.addMenuItem("Jwelery Lot","window.open('../Master/EditJewelry.jsp?command=edit&message=Default', 'right');");
+     fw_menu_10_2.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_10_2.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_10_2.fontWeight="bold";
+     fw_menu_10_2.hideOnMouseOut=true;
+    window.fw_menu_10_3 = new Menu("Finance",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+    fw_menu_10_3.addMenuItem("Account","window.open('../Master/EditParty.jsp?command=edit&message=masters', 'right');");
+    fw_menu_10_3.addMenuItem("Bank Account","window.open('../Master/EditAccount.jsp?command=edit', 'right');");
+    fw_menu_10_3.addMenuItem("Cash","window.open('../Master/EditCash.jsp?command=Default&message=masters', 'right');");
+    fw_menu_10_3.addMenuItem("Group","window.open('../Master/EditGroup.jsp?command=edit&message=masters', 'right');");
+    fw_menu_10_3.addMenuItem("Ledger","window.open('../Master/EditLedger.jsp?command=edit&message=masters', 'right');");
+    fw_menu_10_3.addMenuItem("Voucher Edit","window.open('../Master/EditVouchers.jsp?command=edit&message=masters', 'right');");
+    fw_menu_10_3.addMenuItem("Voucher Cancel","window.open('../Master/CancelVouchers.jsp?command=edit&message=masters', 'right');");
+    fw_menu_10_3.addMenuItem("Trial Balance","window.open('../Report/NewTrailBalance.jsp?command=Default', 'right');");
+     fw_menu_10_3.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_10_3.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_10_3.fontWeight="bold";
+     fw_menu_10_3.hideOnMouseOut=true;
+  window.fw_menu_10 = new Menu("root",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_10.addMenuItem("Purchase","window.open('../Master/EditPurchase.jsp?command=PurchaseReport&message=masters', 'right');");
+  fw_menu_10.addMenuItem("Sales","window.open('../Master/EditSale.jsp?command=SaleReport&message=masters', 'right');");
+  fw_menu_10.addMenuItem("Sales Person","window.open('../Master/EditSalesPerson.jsp?command=edit&message=Default', 'right');");
+  fw_menu_10.addMenuItem(fw_menu_10_1);
+  fw_menu_10.addMenuItem(fw_menu_10_2,"window.open('sales.html', 'right');");
+  fw_menu_10.addMenuItem(fw_menu_10_3);
+   fw_menu_10.bgImageUp="fwmenu5_130x21_up.gif";
+   fw_menu_10.bgImageOver="fwmenu5_130x21_over.gif";
+   fw_menu_10.fontWeight="bold";
+   fw_menu_10.hideOnMouseOut=true;
+   fw_menu_10.childMenuIcon="arrows.gif";
+  window.fw_menu_11 = new Menu("root",86,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_11.addMenuItem("Book","window.open('../Inventory/InvReport.jsp?command=PurchaseReport&message=Default', 'right');");
+  fw_menu_11.addMenuItem("Register","window.open('../Inventory/InvRegister.jsp?command=PurchaseReport&message=Default', 'right');");
+  fw_menu_11.addMenuItem("Payment","window.open('../Inventory/InvFinanceReport.jsp?command=PurchaseReport', 'right');");
+  fw_menu_11.addMenuItem("Return","window.open('../REPORT/ReturnReport.jsp?command=PurchaseReturn', 'right');");
+   fw_menu_11.bgImageUp="fwmenu4_86x21_up.gif";
+   fw_menu_11.bgImageOver="fwmenu4_86x21_over.gif";
+   fw_menu_11.fontWeight="bold";
+   fw_menu_11.hideOnMouseOut=true;
+  window.fw_menu_12 = new Menu("root",84,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_12.addMenuItem("Book","window.open('../Inventory/InvReport.jsp?command=SaleReport&message=Default', 'right');");
+  fw_menu_12.addMenuItem("Register","window.open('../Inventory/InvRegister.jsp?command=SaleReport&message=Default', 'right');");
+  fw_menu_12.addMenuItem("Receipt","window.open('../Inventory/InvFinanceReport.jsp?command=SaleReport', 'right');");
+  fw_menu_12.addMenuItem("Return","window.open('../REPORT/SaleReturnReport1.jsp?command=SaleReturn', 'right');");
+  fw_menu_12.addMenuItem("Person","window.open('../Inventory/InvSalesPersonReport.jsp?command=SalesPerson', 'right');");
+   fw_menu_12.bgImageUp="fwmenu3_84x21_up.gif";
+   fw_menu_12.bgImageOver="fwmenu3_84x21_over.gif";
+   fw_menu_12.fontWeight="bold";
+   fw_menu_12.hideOnMouseOut=true;
+  window.fw_menu_13 = new Menu("root",88,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_13.addMenuItem("Purchase","window.open('../Consignment/CgtReport.jsp?command=PurchaseReport&message=Default', 'right');");
+  fw_menu_13.addMenuItem("Sales ","window.open('../Consignment/CgtReport.jsp?command=SaleReport&message=Default', 'right');");
+   fw_menu_13.bgImageUp="fwmenu2_88x21_up.gif";
+   fw_menu_13.bgImageOver="fwmenu2_88x21_over.gif";
+   fw_menu_13.fontWeight="bold";
+   fw_menu_13.hideOnMouseOut=true;
+  window.fw_menu_14 = new Menu("root",131,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_14.addMenuItem("Stock","window.open('../Report/CgtReport.jsp?command=StockReport&message=Default', 'right');");
+  fw_menu_14.addMenuItem("Stock Summary","window.open('../Consignment/Matrix.jsp?command=Stock', 'right');");
+  fw_menu_14.addMenuItem("Stock Transfer","window.open('../Inventory/InvStockTransferReport.jsp?command=Default', 'right');");
+  fw_menu_14.addMenuItem("Lot History","window.open('../REPORT/LotHistory.jsp?command=Default', 'right');");
+  fw_menu_14.addMenuItem("Lot Matrix","window.open('../Consignment/Matrix.jsp?command=Default', 'right');");
+   fw_menu_14.bgImageUp="fwmenu1_131x21_up.gif";
+   fw_menu_14.bgImageOver="fwmenu1_131x21_over.gif";
+   fw_menu_14.fontWeight="bold";
+   fw_menu_14.hideOnMouseOut=true;
+
+  window.fw_menu_15 = new Menu("root",131,21,"Times New Roman, Times, serif",15,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_15.addMenuItem("Cash Book ","window.open('../Report/CashBook.jsp?command=Default', 'right');");
+  fw_menu_15.addMenuItem("Bank Book","window.open('../Report/BankBook.jsp?command=Default', 'right');");
+  fw_menu_15.addMenuItem("PN Register","window.open('../Report/PNBook.jsp?command=Default', 'right');");
+   fw_menu_15.bgImageUp="fwmenu1_131x21_up.gif";
+   fw_menu_15.bgImageOver="fwmenu1_131x21_over.gif";
+   fw_menu_15.fontWeight="bold";
+   fw_menu_15.hideOnMouseOut=true;
+	
+  
+  window.fw_menu_16 = new Menu("root",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_16.addMenuItem("Account Ledger" ,"window.open('../Report/PartyReport.jsp?command=Default', 'right');");
+  fw_menu_16.addMenuItem("Balance Sheet" ,"window.open('../Report/BalanceSheet.jsp?command=Default', 'right');");
+  fw_menu_16.addMenuItem("Day Book","window.open('../Report/DayBook.jsp?command=Default', 'right');");
+ fw_menu_16.addMenuItem("Ex-Gain/Loss","window.open('../Report/ExGainLoss.jsp?command=Default', 'right');");
+fw_menu_16.addMenuItem("Ex-Rate","window.open('../Report/ExchangeReport.jsp?command=Default', 'right');");
+fw_menu_16.addMenuItem("Journal Register","window.open('../Report/JournalRegister.jsp?command=Default', 'right');");
+fw_menu_16.addMenuItem("Ledger Book","window.open('../Report/LedgerBook1.jsp?command=Default', 'right');");
+fw_menu_16.addMenuItem("Profit/Loss","window.open('../Report/ProfitLossReport.jsp?command=Default', 'right');");
+fw_menu_16.addMenuItem("Sheikesho","window.open('../Report/Sheikesho.jsp?command=Default', 'right');");
+fw_menu_16.addMenuItem("Trial Balance","window.open('../Report/TrailBalanceFormats.jsp', 'right');");
+   fw_menu_16.bgImageUp="fwmenu5_130x21_up.gif";
+   fw_menu_16.bgImageOver="fwmenu5_130x21_over.gif";
+   fw_menu_16.fontWeight="bold";
+   fw_menu_16.hideOnMouseOut=true;
+
+
+  window.fw_menu_17 = new Menu("root",169,21,"Times New Roman, Times, serif",17,"#ffffff","#000033","#000033","#ffffff");
+  fw_menu_17.addMenuItem("Account Summary","window.open('../Report/PartyOpening.jsp?command=Default', 'right');");
+  fw_menu_17.addMenuItem("Acnt MIS Smry","window.open('../Report/MisPartyReport.jsp?command=Default', 'right');");
+  fw_menu_17.addMenuItem("Ledger Summary","window.open('../Report/OpeningBalance.jsp?command=Default', 'right');");
+   fw_menu_17.bgImageUp="fwmenu10_169x21_up.gif";
+   fw_menu_17.bgImageOver="fwmenu10_169x21_over.gif";
+   fw_menu_17.fontWeight="bold";
+   fw_menu_17.hideOnMouseOut=true;
+	
+
+
+
+  fw_menu_17.writeMenus();
+} // fwLoadMenus()
+
+//-->
+</script>
+<script language="JavaScript1.2" src="fw_menu.js"></script>
+<link href='Samyak/Samyakcss.css' rel=stylesheet type='text/css'>
+</head>
+<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" bgcolor="#ffffff" onLoad="MM_preloadImages('purchaseb.jpg','Salesb.jpg','consignmentb.jpg','inventoryb.jpg','Creatb.jpg','Moneyb.jpg','pictureb.jpg','rapb.jpg','administratorb.jpg','Systemb.jpg','functionb.jpg','Prob.jpg','Srob.jpg','Crob.jpg','Irob.jpg','Arob.jpg','Frob.jpg','Mrob.jpg');" scroll=no >
+<script language="JavaScript1.2">fwLoadMenus();</script>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr><td width='15%'>
+<table border="0" cellpadding="0" cellspacing="0" width="160">
+  <tr>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="156" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="2" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+
+  <tr>
+   <th colspan="4" class='homeheading'><img name="Menu_r1_c1" src="Menu_r1_c1.gif" width="160" height="34" border="0">  <!-- Operations --></td>
+   <td> <img src="spacer.gif" width="1" height="34" border="0"> </td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_0,159,36);MM_swapImage('Menu_r2_c1','','purchaseb.jpg',1);" ><img name="Menu_r2_c1" src="Menu_r2_c1.gif" width="157" height="22" border="0"></a></td>
+   <td rowspan="21" colspan="2"><img name="Menu_r2_c3" src="Menu_r2_c3.gif" width="3" height="287" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r3_c1" src="Menu_r3_c1.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_1,157,56);MM_swapImage('Menu_r4_c1','','Salesb.jpg',1);" ><img name="Menu_r4_c1" src="Menu_r4_c1.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r5_c1" src="Menu_r5_c1.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_2,157,79);MM_swapImage('Menu_r6_c1','','consignmentb.jpg',1);" ><img name="Menu_r6_c1" src="Menu_r6_c1.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r7_c1" src="Menu_r7_c1.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_3,157,102);MM_swapImage('Menu_r8_c1','','inventoryb.jpg',1);" ><img name="Menu_r8_c1" src="Menu_r8_c1.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r9_c1" src="Menu_r9_c1.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_4,157,125);MM_swapImage('Menu_r10_c1','','Creatb.jpg',1);" ><img name="Menu_r10_c1" src="Menu_r10_c1.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r11_c1" src="Menu_r11_c1.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_5,157,148);MM_swapImage('Menu_r12_c1','','Moneyb.jpg',1);" ><img name="Menu_r12_c1" src="Menu_r12_c1.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_6,157,171);MM_swapImage('Menu_r13_c1','','pictureb.jpg',1);" ><img name="Menu_r13_c1" src="Menu_r13_c1.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r14_c1" src="Menu_r14_c1.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_7,157,193);MM_swapImage('Menu_r15_c1','','rapb.jpg',1);" ><img name="Menu_r15_c1" src="Menu_r15_c1.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r16_c1" src="Menu_r16_c1.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_8,157,216);MM_swapImage('Menu_r17_c1','','administratorb.jpg',1);" ><img name="Menu_r17_c1" src="Menu_r17_c1.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r18_c1" src="Menu_r18_c1.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+   <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_9,157,239);MM_swapImage('Menu_r19_c1','','SYSTEMB.JPG',1);" ><img name="Menu_r19_c1" src="Menu_r19_c1.gif" width="157" height="22" border="0"></a></td>
+   <td rowspan="18"><img name="Menu_r19_c3" src="Menu_r19_c3.gif" width="3" height="365" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+
+  <tr>
+   <td colspan="2"><img name="Menu_r20_c1" src="Menu_r20_c1.gif" width="157" height="3" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="3" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_10,157,263);MM_swapImage('Menu_r21_c1','','edit_b.jpg',1);" ><img name="Menu_r21_c1" src="Menu_r21_c1.gif" width="157" height="20" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="20" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r22_c1" src="Menu_r22_c1.gif" width="157" height="40" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="40" border="0"></td>
+  </tr>
+  <tr>
+   <td rowspan="14"><img name="Menu_r23_c1" src="Menu_r23_c1.gif" width="1" height="284" border="0"></td>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_11,158,321);MM_swapImage('Menu_r23_c2','','Prob.jpg',1);" ><img name="Menu_r23_c2" src="Menu_r23_c2.gif" width="157" height="22" border="0"></a></td>
+   <td rowspan="14"><img name="Menu_r23_c4" src="Menu_r23_c4.gif" width="2" height="284" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r24_c2" src="Menu_r24_c2.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_12,158,343);MM_swapImage('Menu_r25_c2','','Srob.jpg',1);" ><img name="Menu_r25_c2" src="Menu_r25_c2.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r26_c2" src="Menu_r26_c2.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_13,158,366);MM_swapImage('Menu_r27_c2','','Crob.jpg',1);" ><img name="Menu_r27_c2" src="Menu_r27_c2.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r28_c2" src="Menu_r28_c2.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();FW_startTimeout();"  onMouseOver="window.FW_showMenu(window.fw_menu_14,158,389);MM_swapImage('Menu_r29_c2','','Irob.jpg',1);" ><img name="Menu_r29_c2" src="Menu_r29_c2.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r30_c2" src="Menu_r30_c2.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();"  onMouseOver="window.FW_showMenu(window.fw_menu_15,158,412);MM_swapImage('Menu_r31_c2','','Arob.jpg',1);" ><img name="Menu_r31_c2" src="Menu_r31_c2.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r32_c2" src="Menu_r32_c2.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();"  onMouseOver="window.FW_showMenu(window.fw_menu_16,158,250); MM_swapImage('Menu_r33_c2','','Frob.jpg',1);" ><img name="Menu_r33_c2" src="Menu_r33_c2.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><img name="Menu_r34_c2" src="Menu_r34_c2.gif" width="157" height="1" border="0"></td>
+   <td><img src="spacer.gif" width="1" height="1" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2"><a href="#" onMouseOut="MM_swapImgRestore();"  onMouseOver="window.FW_showMenu(window.fw_menu_17,158,458);MM_swapImage('Menu_r35_c2','','Mrob.jpg',1);" ><img name="Menu_r35_c2" src="Menu_r35_c2.gif" width="157" height="22" border="0"></a></td>
+   <td><img src="spacer.gif" width="1" height="22" border="0"></td>
+  </tr>
+  <tr>
+   <td colspan="2" align=center	>
+	    <img name="Menu_r36_c2" src="Menu_r36_c2.gif" width="157" height="12" border="0">
+ <A href="../FineStarHome/SamyakSession.jsp" target=_parent>
+<b><u>Logout <%=company_name%>1</b></u></a> 
+	    <img name="Menu_r36_c2" src="Menu_r36_c2.gif" width="157" height="100" border="0">
+
+
+</td>
+  <td><img src="spacer.gif" width="1" height="124" border="0"></td>
+ </tr>
+</table>
+</td>
+<td width='55%' height='100%'><IFRAME NAME="right" SRC="../right.html" WIDTH="100%" HEIGHT="98%" border=0 ></IFRAME> 
+	
+</td>
+</tr>
+</table>
+<%
+
+}
+%>
+
+</body>
+</html>
+
+
+
+

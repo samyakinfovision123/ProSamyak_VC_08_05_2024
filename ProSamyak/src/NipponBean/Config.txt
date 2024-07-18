@@ -1,0 +1,2 @@
+path="C:\SamyakSoft\Tomcat5.0\webapps\ROOT\Samyak\Nippon\Picture"
+barcode="NO"

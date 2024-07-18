@@ -1,0 +1,25 @@
+<Context path="/Nippon" docBase="Nippon" debug="0" reloadable="true">
+			<Resource name="jdbc/NipponTestDB" scope="Shareable" type="javax.sql.DataSource"/>
+			<ResourceParams name="jdbc/NipponTestDB">
+				<parameter>
+					<name>maxWait</name>
+					<value>5000</value>
+				</parameter>
+				<parameter>
+					<name>maxActive</name>
+					<value>50</value>
+				</parameter>
+				<parameter>
+					<name>url</name>
+					<value>jdbc:microsoft:sqlserver://SAMYAK2:1433;DatabaseName=NipponTest;User=admin;password=admin;ServerName=SAMYAK2</value>
+				</parameter>
+				<parameter>
+					<name>driverClassName</name>
+					<value>com.microsoft.jdbc.sqlserver.SQLServerDriver</value>
+				</parameter>
+				<parameter>
+					<name>maxIdle</name>
+					<value>500000</value>
+				</parameter>
+			</ResourceParams>
+		</Context> 

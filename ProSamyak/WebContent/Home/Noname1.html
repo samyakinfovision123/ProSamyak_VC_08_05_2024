@@ -1,0 +1,113 @@
+<HTML>
+<HEAD>
+<title>Samyak Software - India </title>
+<link href='styles.css' rel=stylesheet type='text/css'>
+<script >
+function validate()
+{
+ if(document.login.user_name.value=="")
+	{
+	 alert(" Please Enter User Name");
+	  document.login.user_name.focus();
+	 return false;
+	}
+	else
+	{
+	  if(document.login.user_pass.value=="")
+		{
+	    alert(" Please Enter Password");
+   	    document.login.user_pass.focus();
+		return false;
+		}
+	return true;	
+	}
+ }
+
+ function pselect(name)
+ {
+ 	document.login.user_pass.select();
+ }
+
+  function uselect(name)
+ {
+ 	document.login.user_name.select();
+ }
+</script>
+</HEAD>
+
+<BODY bgcolor="white"><!-- background="earth.jpg">-->
+<TABLE width="100%">
+<TR>
+<TD align="left" valign="top">
+<IMG src="logo.bmp" align="left">
+</TD>
+<TD align="center" valign="top">
+<IMG src="temp.gif" align="center">
+</TD>
+<TD align="right" valign="top">
+<IMG src="diamond.gif" align="right">
+</TD>
+</TR>
+</TABLE>
+<BR>
+<BR>
+<form action='indexNippon.jsp' name=login target=_blank onsubmit='window.close()'>
+<TABLE border=1 align="center" class="text" bordercolor="#C0C0C0" frame="box" rules="none">
+<TR>
+<TD class="celltext">
+Login:
+</TD>
+<TD>
+<INPUT type="text" name="user_name" maxlength="20" class="textbox" onFocus="this.select();">
+</TD>
+</TR>
+<TR>
+<TD class="celltext">
+Password:
+</TD>
+<TD>
+<INPUT type="text" maxlength="20" name="user_pass" class="textbox" onFocus="this.select()">
+</TD>
+</TR>
+<TR>
+<TD class="celltext">
+&nbsp;
+</TD>
+<TD align="center">
+<INPUT type="SUBMIT" value="Go" name="command" class="subres" onMouseOut="this.className='subres';" 
+onMouseOver="this.className='subres1';" onClick="return(validate())">
+</TD>
+</TR>
+</TABLE>
+</FORM>
+<CENTER>
+<IMG src="line2.bmp" width="30%" align="center">
+</CENTER>
+<BR><BR><BR><BR><BR><BR><BR>
+<TABLE class="text" width="100%">
+<TR>
+<TD align="left">
+<SPAN class="subtitlered">Designed And Developed By:-</SPAN> Samyak Software, India.
+</TD>
+<TD align="right">
+<SPAN class="subtitlered">Marketed And Supported By:-</SPAN>
+Associated Technologies, India.
+</TD>
+</TR>
+</TABLE>
+<TABLE align="center" width="50%" class="text">
+<TR>
+<TD align="center">
+<A href="www.esamyak.com">
+<IMG src="samyakflying.gif" height="40" border=0><BR>
+www.esamyak.com</A>
+</TD>
+</TR>
+<TR>
+<TD align="center">
+Copyright © 2005, Samyak Software, India. All Rights Reserved.
+</TD>
+</TR>
+</TABLE>
+</BODY>
+</HTML>

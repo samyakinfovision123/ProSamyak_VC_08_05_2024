@@ -1,0 +1,593 @@
+<%@ page language="java" import="java.io.*,java.sql.*,java.util.*,NipponBean.*" errorPage="errorpage.jsp" %>
+<jsp:useBean id="A" class="NipponBean.Array" />
+<jsp:useBean id="I" class="NipponBean.Inventory" />
+<jsp:useBean id="C"  scope="application" class="NipponBean.Connect" />
+
+
+<html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN"
+    "http://www.w3.org/TR/html4/strict.dtd">
+
+<head>
+<title>Samyak Software</title>
+
+<link href='../Samyak/Samyakcss.css' rel=stylesheet type='text/css'>
+<meta http-equiv="Content-Type" content="text/html;">
+<script language="JavaScript">
+	function d(str)
+{
+window.open(str,"_blank", ["Top=50","Left=170","Toolbar=no", "Location=0","Menubar=no","Height=700","Width=700", "Resizable=no","Scrollbars=no","status=no"])
+}
+	function j(str)
+{
+window.open(str,"_blank", ["Top=50","Left=170","Toolbar=no", "Location=0","Menubar=no","Height=700","Width=700", "Resizable=no","Scrollbars=no","status=no"])
+}
+
+function tb(str)
+{
+window.open(str,"_blank", ["Top=50","Left=170","Toolbar=no", "Location=0","Menubar=yes","Height=500","Width=700", "Resizable=yes","Scrollbars=yes","status=no"])
+}
+
+function MM_findObj(n, d) { //v3.0
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document); return x;
+}
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+ var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+   var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+   if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function fwLoadMenus() {
+	var local_currencysymbol='Rs';
+		var cuurr_date='24/08/2004';
+
+  if (window.fw_menu_0) return;
+  //Menu(label, mw, mh, fnt, fs, fclr, fhclr, bg, bgh, bgc)
+
+    window.fw_menu_0_1 = new Menu("Report",70,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+
+  fw_menu_0_1.addMenuItem("Book","window.open('../Inventory/InvReport.jsp?command=PurchaseReport&message=Default&pieces=no', 'right');");
+  fw_menu_0_1.addMenuItem("Register","window.open('../Inventory/InvRegister.jsp?command=PurchaseReport&message=Default', 'right');");
+  fw_menu_0_1.addMenuItem("Payment","window.open('../Inventory/InvFinanceReport.jsp?command=PurchaseReport', 'right');");
+  fw_menu_0_1.addMenuItem("Return","window.open('../Report/ReturnReport.jsp?command=PurchaseReturn', 'right');");
+   fw_menu_0_1.bgImageUp="fwmenu4_86x21_up.gif";
+   fw_menu_0_1.bgImageOver="fwmenu4_86x21_over.gif";
+   fw_menu_0_1.fontWeight="bold";
+   fw_menu_0_1.hideOnMouseOut=true;
+  window.fw_menu_0 = new Menu("root",100,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_0.addMenuItem("Local","window.open('../Inventory/InvReceive.jsp?command=Default&lots=1&message=Default&purchase=Local&pieces=no&ledgers=0&receive_id=Samyak&invoicedate="+cuurr_date+"', 'right');");
+ //window.open('../Inventory/PurchaseReport.jsp?command=Default', 'Samyak');
+ fw_menu_0.addMenuItem("Import","window.open('../Inventory/InvReceive.jsp?command=Default&lots=1&message=Default&purchase=Import&pieces=no&ledgers=0&receive_id=Samyak&invoicedate="+cuurr_date+"', 'right');");
+  fw_menu_0.addMenuItem("Return","window.open('../Inventory/ReturnPurchase.jsp?command=PurchaseReport&message=masters', 'right');");
+
+  fw_menu_0.addMenuItem("Return Local","window.open('../Inventory/ReturnPurchaseWOInv.jsp?command=Default&lots=1&message=Default&sale=Local&pieces=no&ledgers=0&receive_id=Samyak&invoicedate="+cuurr_date+"', 'right');");
+
+  fw_menu_0.addMenuItem("Return Import","window.open('../Inventory/ReturnPurchaseWOInv.jsp?command=Default&lots=1&message=Default&sale=Export&pieces=no&ledgers=0&receive_id=Samyak&invoicedate="+cuurr_date+"', 'right');");
+
+  fw_menu_0.addMenuItem(fw_menu_0_1);
+
+ /*  fw_menu_0.bgImageUp="fwmenu15_76x21_up.gif";
+   fw_menu_0.bgImageOver="fwmenu15_76x21_over.gif";
+   fw_menu_0.fontWeight="bold";
+   fw_menu_0.hideOnMouseOut=true;
+*/
+
+   fw_menu_0.bgImageUp="fwmenu12_145x21_up.gif";
+   fw_menu_0.bgImageOver="fwmenu12_145x21_over.gif";
+   fw_menu_0.fontWeight="bold";
+   fw_menu_0.hideOnMouseOut=true;
+
+    window.fw_menu_1_1 = new Menu("Export",84,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+fw_menu_1_1.addMenuItem("Local","window.open('../Inventory/InvSell.jsp?command=Default&lots=1&sale=Export&exporttype=local&pieces=no&ledgers=0', 'right');");
+fw_menu_1_1.addMenuItem("Dollar","window.open('../Inventory/InvSell.jsp?command=Default&lots=1&sale=Export&exporttype=dollar&pieces=no&ledgers=0', 'right');");
+
+
+window.fw_menu_1_2 = new Menu("Report",70,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_1_2.addMenuItem("Book","window.open('../Inventory/InvReport.jsp?command=SaleReport&message=Default&pieces=no', 'right');");
+  fw_menu_1_2.addMenuItem("Register","window.open('../Inventory/InvRegister.jsp?command=SaleReport&message=Default', 'right');");
+  fw_menu_1_2.addMenuItem("Receipt","window.open('../Inventory/InvFinanceReport.jsp?command=SaleReport', 'right');");
+  fw_menu_1_2.addMenuItem("Return","window.open('../Report/SaleReturnReport1.jsp?command=SaleReturn', 'right');");
+  fw_menu_1_2.addMenuItem("Person","window.open('../Inventory/InvSalesPersonReport.jsp?command=SalesPerson', 'right');");
+   fw_menu_1_2.bgImageUp="fwmenu3_84x21_up.gif";
+   fw_menu_1_2.bgImageOver="fwmenu3_84x21_over.gif";
+   fw_menu_1_2.fontWeight="bold";
+   fw_menu_1_2.hideOnMouseOut=true;
+
+   fw_menu_1_1.bgImageUp="fwmenu12_145x21_up.gif";
+   fw_menu_1_1.bgImageOver="fwmenu12_145x21_over.gif";
+   fw_menu_1_1.fontWeight="bold";
+   fw_menu_1_1.hideOnMouseOut=true;
+
+
+  window.fw_menu_1 = new Menu("root",100,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  	 fw_menu_1.addMenuItem("Local","window.open('../Inventory/InvSell.jsp?command=Default&lots=1&sale=Local&message=Default&pieces=no&ledgers=0&receive_id=Samyak&invoicedate="+cuurr_date+"', 'right');");
+  fw_menu_1.addMenuItem("Export","window.open('../Inventory/InvSell.jsp?command=Default&lots=1&sale=Export&message=Default&pieces=no&ledgers=0&receive_id=Samyak&invoicedate="+cuurr_date+"', 'right');");
+  fw_menu_1.addMenuItem("Return","window.open('../Inventory/ReturnSale.jsp?command=SaleReport&message=masters', 'right');");
+
+   fw_menu_1.addMenuItem("Return Local","window.open('../Inventory/ReturnSaleWOInv.jsp?command=Default&lots=1&message=Default&purchase=Local&pieces=no&ledgers=0&receive_id=Samyak&invoicedate="+cuurr_date+"', 'right');");
+  fw_menu_1.addMenuItem("Return Export","window.open('../Inventory/ReturnSaleWOInv.jsp?command=Default&lots=1&message=Default&purchase=Export&pieces=no&ledgers=0&receive_id=Samyak&invoicedate="+cuurr_date+"', 'right');");
+
+ fw_menu_1.addMenuItem("Person","window.open('../Master/SalesPerson.jsp?command=Default&message=Default', 'right');")
+
+	    fw_menu_1.addMenuItem(fw_menu_1_2);
+
+/*   fw_menu_1.bgImageUp="fwmenu14_76x21_up.gif";
+   fw_menu_1.bgImageOver="fwmenu14_76x21_over.gif";
+   fw_menu_1.fontWeight="bold";
+   fw_menu_1.hideOnMouseOut=true;
+*/
+   fw_menu_1.bgImageUp="fwmenu12_145x21_up.gif";
+   fw_menu_1.bgImageOver="fwmenu12_145x21_over.gif";
+   fw_menu_1.fontWeight="bold";
+   fw_menu_1.hideOnMouseOut=true;
+
+
+window.fw_menu_2_1 = new Menu("Report",84,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_2_1.addMenuItem("Purchase","window.open('../Consignment/CgtReport.jsp?command=PurchaseReport&message=Default', 'right');");
+
+  fw_menu_2_1.addMenuItem("Pur. Return ","window.open('../Consignment/ReturnReport.jsp?command=ReturnReport', 'right');");
+  
+  fw_menu_2_1.addMenuItem("Pur. Status ","window.open('../Consignment/CurrentStatusReport.jsp?command=Default', 'right');");
+
+  fw_menu_2_1.addMenuItem("Pur. Ana ","window.open('../Consignment/CurrentStatusReport.jsp?command=DefaultAnalysis', 'right');");
+
+  fw_menu_2_1.addMenuItem("Sales ","window.open('../Consignment/CgtReport.jsp?command=SaleReport&message=Default', 'right');");
+  fw_menu_2_1.addMenuItem("Sales Return ","window.open('../Consignment/SaleReturnReport.jsp?command=SaleReturnReport', 'right');");
+  fw_menu_2_1.addMenuItem("Sales Status ","window.open('../Consignment/SaleCurrentStatusReport.jsp?command=Default', 'right');");
+  
+   fw_menu_2_1.bgImageUp="fwmenu12_145x21_up.gif";
+   fw_menu_2_1.bgImageOver="fwmenu12_145x21_over.gif";
+   fw_menu_2_1.fontWeight="bold";
+   fw_menu_2_1.hideOnMouseOut=true;
+  
+  window.fw_menu_2 = new Menu("root",125,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_2.addMenuItem("Purchase","window.open('../Consignment/CgtReceive.jsp?command=Default&lots=1&stock=no&invoicedate="+cuurr_date+"', 'right');");
+  fw_menu_2.addMenuItem("Purchase Ret./Con.","window.open('../Consignment/CgtReceiveReturnConfrime.jsp?command=Default', 'right');");
+  
+  fw_menu_2.addMenuItem("Sales","window.open('../Consignment/CgtSell.jsp?command=Default&lots=1&stock=no&invoicedate="+cuurr_date+"', 'right');");
+
+	fw_menu_2.addMenuItem("Sales Ret./Con.","window.open('../Consignment/CgtSellConfrimReturn.jsp?command=Default', 'right');");
+	    fw_menu_2.addMenuItem(fw_menu_2_1);
+
+   fw_menu_2.bgImageUp="fwmenu6_169x21_up.gif";
+   fw_menu_2.bgImageOver="fwmenu6_169x21_over.gif";
+   fw_menu_2.fontWeight="bold";
+   fw_menu_2.hideOnMouseOut=true;
+
+    window.fw_menu_3_1 = new Menu("Stock Transfer",100,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_3_1.addMenuItem("Lot to Lot","window.open('../Inventory/StockTransfer.jsp?command=Default&lots=1&StockTransfer_Type=1', 'right');");
+  fw_menu_3_1.addMenuItem("Location","window.open('../Inventory/StockTransfer.jsp?command=Default&lots=1&StockTransfer_Type=2', 'right');");
+  fw_menu_3_1.addMenuItem("Diff. Rates", "window.open('../Inventory/StockTransferType.jsp?command=Default&slots=1&dlots=1&StockTransfer_Type=3', 'right');");
+  fw_menu_3_1.addMenuItem("Manufacturing","window.open('../Inventory/StockTransferType.jsp?command=Default&slots=1&dlots=1&StockTransfer_Type=4', 'right');");
+  fw_menu_3_1.addMenuItem("Melting","window.open('../Inventory/StockTransferType.jsp?command=Default&slots=1&dlots=1&StockTransfer_Type=5', 'right');");
+
+  fw_menu_3_1.addMenuItem("Loss/Wastage","window.open('../Inventory/StockTransferType.jsp?command=Default&slots=1&dlots=0&StockTransfer_Type=6', 'right');");
+   fw_menu_3_1.bgImageUp="fwmenu12_145x21_up.gif";
+   fw_menu_3_1.bgImageOver="fwmenu12_145x21_over.gif";
+   fw_menu_3_1.fontWeight="bold";
+   fw_menu_3_1.hideOnMouseOut=true;
+
+ window.fw_menu_3_2_1 = new Menu("Lot Matrix",120,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+
+ fw_menu_3_2_1.addMenuItem("Diamond","window.open('../Report/DiamondLot.jsp?command=Default', 'right');");
+ fw_menu_3_2_1.addMenuItem("Jewelry","window.open('../Report/NewjewelryLot1.jsp?command=Default', 'right');");
+
+fw_menu_3_2_1.addMenuItem("OP Jewelry","window.open('../Report/OpeningStockMatrix.jsp?command=Default&message=Default', 'right');");
+
+fw_menu_3_2_1.addMenuItem("OP Diamond","window.open('../Report/OpeningDiamondLot.jsp?command=Default&message=Default', 'right');");
+
+   fw_menu_3_2_1.bgImageUp="fwmenu1_131x21_up.gif";
+   fw_menu_3_2_1.bgImageOver="fwmenu1_131x21_over.gif";
+   fw_menu_3_2_1.fontWeight="bold";
+   fw_menu_3_2_1.hideOnMouseOut=true;
+
+  window.fw_menu_3_2_2 = new Menu("Stock Summary",125,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+
+ fw_menu_3_2_2.addMenuItem("Local","window.open('../Inventory/InvStockSummary.jsp?command=Default', 'right');");
+ fw_menu_3_2_2.addMenuItem("Dollar","window.open('../Inventory/InvStockSummarydollar.jsp?command=Default', 'right');");
+
+fw_menu_3_2_2.addMenuItem("Jewelry Summary","window.open('../Report/StockReportSummary.jsp?command=StockReport&message=Default', 'right');");
+fw_menu_3_2_2.addMenuItem("Diamond Summary","window.open('../Report/StockReportSummaryDiamond.jsp?command=StockReport&message=Default', 'right');");
+
+   fw_menu_3_2_2.bgImageUp="fwmenu8_160x21_up.gif";
+   fw_menu_3_2_2.bgImageOver="fwmenu8_160x21_over.gif";
+   fw_menu_3_2_2.fontWeight="bold";
+   fw_menu_3_2_2.hideOnMouseOut=true;
+
+  window.fw_menu_3_2_3 = new Menu("Alert",100,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+
+
+ fw_menu_3_2_3.addMenuItem("Reorder Point" ,"window.open('../Report/AlertReorder.jsp?command=Default', 'right');");
+ fw_menu_3_2_3.addMenuItem("Optimum Qty" ,"window.open('../Report/AlertOptimum.jsp?command=Default', 'right');");
+
+   fw_menu_3_2_3.bgImageUp="fwmenu12_145x21_up.gif";
+   fw_menu_3_2_3.bgImageOver="fwmenu12_145x21_over.gif";
+   fw_menu_3_2_3.fontWeight="bold";
+   fw_menu_3_2_3.hideOnMouseOut=true;
+
+
+  window.fw_menu_3_2 = new Menu("Reports",110,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+
+fw_menu_3_2.addMenuItem("Stock","window.open('../Report/CgtStReport.jsp?command=StockReport&message=Default', 'right');");
+
+
+fw_menu_3_2.addMenuItem("Loc. Stock","window.open('../Report/LocationReport.jsp?command=StockReport&message=Default', 'right');");
+  fw_menu_3_2.addMenuItem(fw_menu_3_2_2);
+  fw_menu_3_2.addMenuItem("Stock Transfer","window.open('../Inventory/InvStockTransferReport.jsp?command=Default', 'right');");
+  fw_menu_3_2.addMenuItem("Lot History","window.open('../Report/LotHistory.jsp?command=Default', 'right');");
+  fw_menu_3_2.addMenuItem(fw_menu_3_2_1);
+  fw_menu_3_2.addMenuItem(fw_menu_3_2_3);
+fw_menu_3_2.addMenuItem("Lot Movement","window.open('../Report/LotMovement.jsp?command=Default', 'right');");
+  fw_menu_3_2.addMenuItem("Picture ","window.open('../Report/Picture.jsp?command=Default', 'right');");
+   fw_menu_3_2.bgImageUp="fwmenu8_160x21_up.gif";
+   fw_menu_3_2.bgImageOver="fwmenu8_160x21_over.gif";
+   fw_menu_3_2.fontWeight="bold";
+   fw_menu_3_2.hideOnMouseOut=true;
+
+ window.fw_menu_3_3 = new Menu("Picture",91,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_3_3.addMenuItem("Upload","window.open('../Inventory/PictureUploadForm.jsp?message=Default', 'right');");
+  fw_menu_3_3.addMenuItem("Modify","window.open('../Master/PictureModifyForm.jsp?message=Default', 'right');");
+   fw_menu_3_3.bgImageUp="fwmenu7_91x21_up.gif";
+   fw_menu_3_3.bgImageOver="fwmenu7_91x21_over.gif";
+   fw_menu_3_3.fontWeight="bold";
+   fw_menu_3_3.hideOnMouseOut=true;
+
+ window.fw_menu_3_4 = new Menu("Add New",91,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+   fw_menu_3_4.addMenuItem(" Diamond",'d("../Master/NewLot.jsp?message=Default")');
+  fw_menu_3_4.addMenuItem(" Jewelry",'j("../Master/NewJewellary.jsp?command=Default&message=masters")');
+  fw_menu_3_4.addMenuItem(" Item", 'j("../Master/NewItem.jsp?command=Category&message=Default")');
+   fw_menu_3_4.addMenuItem(" Category","window.open('../Master/NewCategory.jsp?command=Default&message=Default', 'right');");
+  fw_menu_3_4.addMenuItem(" SubCategory","window.open('../Master/NewSubCategory.jsp?command=Default&message=Default', 'right');");
+  fw_menu_3_4.addMenuItem(" Unit","window.open('../Master/NewUnit.jsp?command=Default&message=Default', 'right');");
+   fw_menu_3_4.addMenuItem(" Location","window.open('../Master/NewLocation.jsp?command=Default&message=Default', 'right');");
+   
+   fw_menu_3_4.bgImageUp="fwmenu7_91x21_up.gif";
+   fw_menu_3_4.bgImageOver="fwmenu7_91x21_over.gif";
+   fw_menu_3_4.fontWeight="bold";
+   fw_menu_3_4.hideOnMouseOut=true;
+
+  window.fw_menu_3 = new Menu("root",100,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+ fw_menu_3.addMenuItem(fw_menu_3_4);
+
+  fw_menu_3.addMenuItem("Opening Stock","window.open('../Master/OpeningStock.jsp?command=Default&message=Default', 'right');");
+  fw_menu_3.addMenuItem("Optimum Qty","window.open('../Master/OptimumQuantity.jsp?command=Default&message=Default', 'right');");
+ 
+
+//  fw_menu_3.addMenuItem("Opening Jwelery","window.open('../Master/OpeningStockjewellary.jsp?command=Default&message=masters', 'right');");
+ // fw_menu_3.addMenuItem("Stock Transfer","window.open('../Inventory/StockTransfer.jsp?command=Default&lots=1', 'right');");
+//fw_menu_3.addMenuItem(fw_menu_3_1);
+ fw_menu_3.addMenuItem("Stock Transfer","window.open('../Inventory/StockTransferType.jsp?command=Continue&saddlots=0&daddlots=0', 'right');");
+fw_menu_3.addMenuItem(fw_menu_3_3);
+fw_menu_3.addMenuItem(fw_menu_3_2);
+
+   fw_menu_3.bgImageUp="fwmenu12_145x21_up.gif";
+   fw_menu_3.bgImageOver="fwmenu12_145x21_over.gif";
+   fw_menu_3.fontWeight="bold";
+   fw_menu_3.hideOnMouseOut=true;
+
+ window.fw_menu_4_2 = new Menu("Cash/Bank Books",131,21,"Times New Roman, Times, serif",15,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_4_2.addMenuItem("Cash Book ","window.open('../Report/CashBook.jsp?command=Default', 'right');");
+  fw_menu_4_2.addMenuItem("Bank Book","window.open('../Report/BankBook.jsp?command=Default', 'right');");
+  fw_menu_4_2.addMenuItem("PN Book","window.open('../Report/PNBookNew.jsp?command=Default', 'right');");
+  fw_menu_4_2.addMenuItem("PN Register","window.open('../Report/PNBook.jsp?command=Default', 'right');");
+
+  fw_menu_4_2.addMenuItem("Bank Reconciliation","window.open('../Report/BankReconciliation.jsp?command=Default', 'right');");
+
+//fw_menu_4_2.addMenuItem("Bank R Yes","window.open('../Report/BankReconciliationYes.jsp?command=Default', 'right');");
+
+//fw_menu_4_2.addMenuItem("Bank R No","window.open('../Report/BankReconciliationNo.jsp?command=Default', 'right');");
+
+fw_menu_4_2.addMenuItem("Bank R All","window.open('../Report/BankReconciliationAll.jsp?command=Default', 'right');");
+
+   fw_menu_4_2.bgImageUp="fwmenu1_131x21_up.gif";
+   fw_menu_4_2.bgImageOver="fwmenu1_131x21_over.gif";
+   fw_menu_4_2.fontWeight="bold";
+   fw_menu_4_2.hideOnMouseOut=true;
+	
+     window.fw_menu_4_1_1 = new Menu("Trial Balance",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+   	fw_menu_4_1_1.addMenuItem("Detailed("+local_currencysymbol+")",'tb("../Report/TrialBalanceFast.jsp?command=Default")');
+    fw_menu_4_1_1.addMenuItem("Detailed (US$)",'tb("../Report/TrailBalanceDollar.jsp?command=Dollar")');
+    fw_menu_4_1_1.addMenuItem("Condensed("+local_currencysymbol+")",'tb("../Report/TrialBalanceFastCondensed.jsp")');
+    fw_menu_4_1_1.addMenuItem("Condensed(US$)",'tb("../Report/TrailBalanceDollarCondensed.jsp?command=Dollar")');
+	fw_menu_4_1_1.addMenuItem("Group("+local_currencysymbol	+")",'tb("../Report/TrialBalanceFastGroup.jsp")');
+     fw_menu_4_1_1.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_4_1_1.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_4_1_1.fontWeight="bold";
+     fw_menu_4_1_1.hideOnMouseOut=true;
+
+  window.fw_menu_4_1 = new Menu("Finance Reports",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_4_1.addMenuItem("Account Ledger" ,"window.open('../Report/PartyReport.jsp?command=Default', 'right');");
+  fw_menu_4_1.addMenuItem("Balance Sheet" ,"window.open('../Report/BalanceSheet.jsp?command=Default', 'right');");
+  fw_menu_4_1.addMenuItem("Day Book","window.open('../Report/DayBook.jsp?command=Default', 'right');");
+ fw_menu_4_1.addMenuItem("Ex-Gain/Loss","window.open('../Report/ExGainLoss.jsp?command=Default', 'right');");
+fw_menu_4_1.addMenuItem("Ex-Rate","window.open('../Report/ExchangeReport.jsp?command=Default', 'right');");
+fw_menu_4_1.addMenuItem("Journal Register","window.open('../Report/JournalRegister.jsp?command=Default', 'right');");
+fw_menu_4_1.addMenuItem("Ledger Book","window.open('../Report/LedgerBook1.jsp?command=Default', 'right');");
+fw_menu_4_1.addMenuItem("Profit/Loss","window.open('../Report/ProfitLossReport.jsp?command=Default', 'right');");
+fw_menu_4_1.addMenuItem("Sheikesho","window.open('../Report/Sheikesho.jsp?command=Default', 'right');");
+
+  fw_menu_4_1.addMenuItem(fw_menu_4_1_1);
+
+   fw_menu_4_1.bgImageUp="fwmenu5_130x21_up.gif";
+   fw_menu_4_1.bgImageOver="fwmenu5_130x21_over.gif";
+   fw_menu_4_1.fontWeight="bold";
+   fw_menu_4_1.hideOnMouseOut=true;
+
+  window.fw_menu_4 = new Menu("root",152,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_4.addMenuItem("Add Group","window.open('../Finance/SundryType.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Account","window.open('../Master/NewParty.jsp?message=Default', 'right');");
+  fw_menu_4.addMenuItem("Bank Account","window.open('../Master/NewAccount.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Cash","window.open('../Master/NewAccount.jsp?command=Default&message=Default&type=cash', 'right');");
+  fw_menu_4.addMenuItem("Capital","window.open('../Finance/Capital.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Current Assets","window.open('../Finance/CurrentAsset.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Current Liabilities","window.open('../Finance/CurrentLiabilities.jsp?command=CurrentLiabilities&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Fixed Assets","window.open('../Finance/Assets.jsp?command=newAsset&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Direct Expenses","window.open('../Finance/SundryType.jsp?command=Sundry&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Indirect Expenses","window.open('../Finance/Indirect.jsp?command=Expense&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Indirect Income","window.open('../Finance/Indirect.jsp?command=Income&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Investment","window.open('../Finance/Investment.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Loan Liabilites","window.open('../Finance/Loan.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Loan &amp; Advance","window.open('../Finance/LoanGiven.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Miscellaneous  Exp.","window.open('../Finance/MiscExp.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Reserve &amp; Surplus","window.open('../Finance/CurrentLiabilities.jsp?command=Expense&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Forward Booking","window.open('../Finance/ForwardBooking.jsp?command=Add&message=Default', 'right');");
+
+    fw_menu_4.addMenuItem("Cost Head Group" ,"window.open('../Master/NewCostHeadGroup.jsp?command=Default&message=Default', 'right');");
+  fw_menu_4.addMenuItem("Cost Head  SubGroup","window.open('../Master/NewCostHeadSubGroup.jsp?command=Default&message=Default', 'right');");
+
+   fw_menu_4.bgImageUp="fwmenu11_152x21_up.gif";
+   fw_menu_4.bgImageOver="fwmenu11_152x21_over.gif";
+   fw_menu_4.fontWeight="bold";
+   fw_menu_4.hideOnMouseOut=true;
+    window.fw_menu_5_1 = new Menu("Voucher",169,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+    fw_menu_5_1.addMenuItem("Contra   F4","window.open('../Finance/Contra.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Payment   F5","window.open('../Finance/Payment.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Recepit   F6","window.open('../Finance/Receipt.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Sales  Recepit   F8","window.open('../Finance/SalesReceipt1.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Purchase Payment  F9","window.open('../Finance/PurchasePayment1.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_1.addMenuItem("Journal  F7","window.open('../Finance/CommonJournal.jsp?command=Default&message=Default', 'right');");
+	fw_menu_5_1.addMenuItem("Set-Off Journal" ,"window.open('../Finance/SetOffJournal.jsp?command=Default&message=Default', 'right');");
+	fw_menu_5_1.addMenuItem("FB Import Payment" ,"window.open('../Finance/FBImportPayment.jsp?command=Default&message=Default', 'right');");
+
+     fw_menu_5_1.bgImageUp="fwmenu10_169x21_up.gif";
+     fw_menu_5_1.bgImageOver="fwmenu10_169x21_over.gif";
+     fw_menu_5_1.fontWeight="bold";
+     fw_menu_5_1.hideOnMouseOut=true;
+    window.fw_menu_5_3_1 = new Menu("PN Settlement",169,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+    fw_menu_5_3_1.addMenuItem("Auto Receipt" ,"window.open('../Finance/PNAutoSettlement.jsp?command=Settlement&type=receipt', '_blank');");
+    fw_menu_5_3_1.addMenuItem("Auto Payment" ,"window.open('../Finance/PNAutoSettlement.jsp?command=Settlement&type=payment', '_blank');");
+    fw_menu_5_3_1.addMenuItem("Settelment","window.open('../Report/PNBook.jsp?command=Settle&message=Default', 'right');");
+     fw_menu_5_3_1.bgImageUp="fwmenu10_169x21_up.gif";
+     fw_menu_5_3_1.bgImageOver="fwmenu10_169x21_over.gif";
+     fw_menu_5_3_1.fontWeight="bold";
+     fw_menu_5_3_1.hideOnMouseOut=true;
+
+   window.fw_menu_5_3 = new Menu("Promissary Note (PN)",169,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+    fw_menu_5_3.addMenuItem("Receipt","window.open('../Finance/PNReceipt.jsp?command=Default&message=Default', 'right');");
+    fw_menu_5_3.addMenuItem("Payment","window.open('../Finance/PNPayment.jsp?command=Default&message=Default', 'right');");
+     fw_menu_5_3.addMenuItem(fw_menu_5_3_1);
+fw_menu_5_3.addMenuItem("Loan(Discounted)","window.open('../Finance/PNLoan.jsp?command=Default&message=Default', '_blank');");
+ //fw_menu_5_3.addMenuItem("Settelment","window.open('../Report/PNBook.jsp?command=Settle&message=Default', 'right');");
+     fw_menu_5_3.bgImageUp="fwmenu10_169x21_up.gif";
+     fw_menu_5_3.bgImageOver="fwmenu10_169x21_over.gif";
+     fw_menu_5_3.fontWeight="bold";
+     fw_menu_5_3.hideOnMouseOut=true;
+
+  window.fw_menu_5 = new Menu("root",169,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+    fw_menu_5.addMenuItem("Print Voucher","window.open('../Report/PrintVouchers.jsp?command=print&message=masters', 'right');");
+
+  fw_menu_5.addMenuItem(fw_menu_5_1);
+//  fw_menu_5.addMenuItem(fw_menu_5_2);
+  fw_menu_5.addMenuItem(fw_menu_5_3);
+  fw_menu_5.addMenuItem(fw_menu_4_2);
+  fw_menu_5.addMenuItem(fw_menu_4_1);
+
+   fw_menu_5.bgImageUp="fwmenu10_169x21_up.gif";
+   fw_menu_5.bgImageOver="fwmenu10_169x21_over.gif";
+   fw_menu_5.fontWeight="bold";
+   fw_menu_5.hideOnMouseOut=true;
+   fw_menu_5.childMenuIcon="arrows.gif";
+   window.fw_menu_7 = new Menu("root",142,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_7.addMenuItem("Rap  Matrix","window.open('../Report/RapMatrix.jsp?command=Default', 'right');");
+//  fw_menu_7.addMenuItem("Rap Stock Value","window.open('rap.html', 'right');");
+   fw_menu_7.bgImageUp="fwmenu6_142x21_up.gif";
+   fw_menu_7.bgImageOver="fwmenu6_142x21_over.gif";
+   fw_menu_7.fontWeight="bold";
+   fw_menu_7.hideOnMouseOut=true;
+    window.fw_menu_8_1 = new Menu("Edit ",143,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+    fw_menu_8_1.addMenuItem("User","window.open('../Master/EditUser.jsp?command=edit&message=Default', 'right');");
+    
+    fw_menu_8_1.addMenuItem("Exchange Rate","window.open('../Master/EditLocalCurrency.jsp?command=update&message=masters', 'right');");
+    fw_menu_8_1.addMenuItem("Local Currency","window.open('../Master/EditLocalCurrency.jsp?command=edit&message=masters', 'right');");
+ 	fw_menu_8_1.addMenuItem("Currency","window.open('../Master/EditMasters.jsp?command=Currency&message=masters', 'right');");
+     fw_menu_8_1.bgImageUp="fwmenu9_143x21_up.gif";
+     fw_menu_8_1.bgImageOver="fwmenu9_143x21_over.gif";
+     fw_menu_8_1.fontWeight="bold";
+     fw_menu_8_1.hideOnMouseOut=true;
+  window.fw_menu_8 = new Menu("root",143,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_8.addMenuItem("Add New User","window.open('../Master/NewUser.jsp?message=Default', 'right');");
+  fw_menu_8.addMenuItem(fw_menu_8_1);
+//  fw_menu_8.addMenuItem("Sheduler","window.open('currency.html', 'right');");
+//  fw_menu_8.addMenuItem("Personal Manager","window.open('personal.html', 'right');");
+   fw_menu_8.bgImageUp="fwmenu9_143x21_up.gif";
+   fw_menu_8.bgImageOver="fwmenu9_143x21_over.gif";
+   fw_menu_8.fontWeight="bold";
+   fw_menu_8.hideOnMouseOut=true;
+   fw_menu_8.childMenuIcon="arrows.gif";
+
+    window.fw_menu_10_1 = new Menu("Consignment",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+    fw_menu_10_1.addMenuItem("Purchase","window.open('../Master/EditCgtPurchase.jsp?command=PurchaseReport&message=masters', 'right');");
+    fw_menu_10_1.addMenuItem("Sales","window.open('../Master/EditCgtSale.jsp?command=SaleReport&message=masters', 'right');");
+     fw_menu_10_1.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_10_1.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_10_1.fontWeight="bold";
+     fw_menu_10_1.hideOnMouseOut=true;
+    window.fw_menu_10_2 = new Menu("Inventory",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+    fw_menu_10_2.addMenuItem("Opening Stock","window.open('../Master/EditOpeningStock.jsp?command=edit&message=Default', 'right');");
+    fw_menu_10_2.addMenuItem("Edit Lot","window.open('../Master/EditLot.jsp?command=edit&message=Default', 'right');");
+  //  fw_menu_10_2.addMenuItem("Jewelery Lot","window.open('../Master/EditJewelry.jsp?command=edit&message=Default', 'right');");
+    fw_menu_10_2.addMenuItem("Edit Category","window.open('../Master/EditCategory.jsp?command=edit&message=Default', 'right');");
+    fw_menu_10_2.addMenuItem("Edit SubCategory","window.open('../Master/EditSubCategory.jsp?command=edit&message=Default', 'right');");
+    fw_menu_10_2.addMenuItem("Edit Unit","window.open('../Master/EditUnit.jsp?command=edit&message=Default', 'right');");
+    fw_menu_10_2.addMenuItem("Edit Location","window.open('../Master/EditLocation.jsp?command=edit&message=Default', 'right');");
+
+     fw_menu_10_2.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_10_2.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_10_2.fontWeight="bold";
+     fw_menu_10_2.hideOnMouseOut=true;
+    window.fw_menu_10_3 = new Menu("Finance",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+    fw_menu_10_3.addMenuItem("Account","window.open('../Master/EditParty.jsp?command=edit&message=masters', 'right');");
+    fw_menu_10_3.addMenuItem("Bank Account","window.open('../Master/EditAccount.jsp?command=edit', 'right');");
+    fw_menu_10_3.addMenuItem("Cash","window.open('../Master/EditAccount.jsp?command=edit&type=cash', 'right');");
+    fw_menu_10_3.addMenuItem("Group","window.open('../Master/EditGroup.jsp?command=edit&message=masters', 'right');");
+	fw_menu_10_3.addMenuItem("Forward Booking","window.open('../Master/EditForwardBooking.jsp?command=edit&message=Default', 'right');");
+	
+	fw_menu_10_3.addMenuItem("Cost Head Group","window.open('../Master/EditCostHeadGroup.jsp?command=edit&message=Default', 'right');");
+	fw_menu_10_3.addMenuItem("Cost Head Sub Group","window.open('../Master/EditCostHeadSubGroup.jsp?command=edit&message=Default', 'right');");
+    fw_menu_10_3.addMenuItem("Ledger","window.open('../Master/EditLedger.jsp?command=edit&message=masters', 'right');");
+    fw_menu_10_3.addMenuItem("Voucher Edit","window.open('../Master/EditVouchers.jsp?command=edit&message=masters', 'right');");
+	  fw_menu_10_3.addMenuItem("Cgt SCancel Cancel","window.open('../Consignment/CancelCgtReturnConfirmseprateSale.jsp?command=Default', 'right');");
+    fw_menu_10_3.addMenuItem("Cgt PCancel Cancel","window.open('../Consignment/CancelCgtReturnConfirmseprate.jsp?command=Default', 'right');");
+    fw_menu_10_3.addMenuItem("Voucher Cancel","window.open('../Master/CancelVouchers.jsp?command=edit&message=masters', 'right');");
+    fw_menu_10_3.addMenuItem("Trial Balance","window.open('../Report/NewTrailBalance.jsp?command=Default', 'right');");
+     fw_menu_10_3.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_10_3.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_10_3.fontWeight="bold";
+     fw_menu_10_3.hideOnMouseOut=true;
+  window.fw_menu_10 = new Menu("root",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+  fw_menu_10.addMenuItem("Purchase","window.open('../Master/EditPurchase.jsp?command=PurchaseReport&message=masters', 'right');");
+  fw_menu_10.addMenuItem("Sales","window.open('../Master/EditSale.jsp?command=SaleReport&message=masters', 'right');");
+
+  fw_menu_10.addMenuItem("Sale Return","window.open('../Master/EditSaleReturn.jsp?command=PurchaseReport&message=masters', 'right');");
+
+  fw_menu_10.addMenuItem("Purchase Return","window.open('../Master/EditPurchaseReturn.jsp?command=SaleReport&message=masters', 'right');");
+
+  
+  fw_menu_10.addMenuItem("Sales Person","window.open('../Master/EditSalesPerson.jsp?command=edit&message=Default', 'right');");
+  fw_menu_10.addMenuItem(fw_menu_10_1);
+  fw_menu_10.addMenuItem(fw_menu_10_2,"window.open('sales.html', 'right');");
+  fw_menu_10.addMenuItem(fw_menu_10_3);
+   fw_menu_10.bgImageUp="fwmenu5_130x21_up.gif";
+   fw_menu_10.bgImageOver="fwmenu5_130x21_over.gif";
+   fw_menu_10.fontWeight="bold";
+   fw_menu_10.hideOnMouseOut=true;
+   fw_menu_10.childMenuIcon="arrows.gif";
+ 
+  
+  
+ 
+
+
+ 
+   window.fw_menu_17_1 = new Menu("Difference A/C",84,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+   	fw_menu_17_1.addMenuItem("Purchase","window.open('../Inventory/InvReport.jsp?command=PurchaseReport&message=Default&hcommand=Difference', 'right');");
+
+  fw_menu_17_1.addMenuItem("Sale","window.open('../Inventory/InvReport.jsp?command=SaleReport&message=Default&hcommand=Difference', 'right');");
+      fw_menu_17_1.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_17_1.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_17_1.fontWeight="bold";
+     fw_menu_17_1.hideOnMouseOut=true;
+
+     window.fw_menu_17_2_1 = new Menu("Debtors",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+fw_menu_17_2_1.addMenuItem("30 Days","tb('../Report/Pendingamount.jsp?command=Default&message=Default&hcommand=30&crdr=Debtors');");
+
+ fw_menu_17_2_1.addMenuItem("60 Days","tb('../Report/Pendingamount.jsp?command=Default&message=Default&hcommand=60&crdr=Debtors');");
+
+ fw_menu_17_2_1.addMenuItem("90 Days","tb('../Report/Pendingamount.jsp?command=Default&message=Default&hcommand=90&crdr=Debtors');");
+	  fw_menu_17_2_1.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_17_2_1.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_17_2_1.fontWeight="bold";
+     fw_menu_17_2_1.hideOnMouseOut=true;
+
+
+  window.fw_menu_17_2_2 = new Menu("Creditors",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+fw_menu_17_2_2.addMenuItem("30 Days","tb('../Report/Pendingamount.jsp?command=Default&message=Default&hcommand=30&crdr=Creditors');");
+
+ fw_menu_17_2_2.addMenuItem("60 Days","tb('../Report/Pendingamount.jsp?command=Default&message=Default&hcommand=60&crdr=Creditors');");
+
+ fw_menu_17_2_2.addMenuItem("90 Days","tb('../Report/Pendingamount.jsp?command=Default&message=Default&hcommand=90&crdr=Creditors');");
+
+	  fw_menu_17_2_2.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_17_2_2.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_17_2_2.fontWeight="bold";
+     fw_menu_17_2_2.hideOnMouseOut=true;
+
+   
+   window.fw_menu_17_2 = new Menu("Pending Amount",130,21,"Times New Roman, Times, serif",14,"#ffffff","#000033","#000033","#ffffff","#000033");
+   	  fw_menu_17_2.addMenuItem(fw_menu_17_2_1);
+   	  fw_menu_17_2.addMenuItem(fw_menu_17_2_2);
+
+
+	  fw_menu_17_2.bgImageUp="fwmenu5_130x21_up.gif";
+     fw_menu_17_2.bgImageOver="fwmenu5_130x21_over.gif";
+     fw_menu_17_2.fontWeight="bold";
+     fw_menu_17_2.hideOnMouseOut=true;
+
+
+  window.fw_menu_17 = new Menu("root",169,21,"Times New Roman, Times, serif",17,"#ffffff","#000033","#000033","#ffffff","#000033");
+    fw_menu_17.addMenuItem(fw_menu_17_1);
+    fw_menu_17.addMenuItem(fw_menu_17_2);
+
+  fw_menu_17.addMenuItem("Account Summary","window.open('../Report/PartyOpening.jsp?command=Default', 'right');");
+  fw_menu_17.addMenuItem("Acnt MIS Smry","window.open('../Report/MisPartyReport.jsp?command=Default', 'right');");
+  fw_menu_17.addMenuItem("Ledger Summary","window.open('../Report/OpeningBalance.jsp?command=Default', 'right');");
+  fw_menu_17.addMenuItem("Cancelled Vouchers","window.open('../Report/CancelledVouchers.jsp?command=edit&message=masters', 'right');");
+  fw_menu_17.addMenuItem('Forward Booking','tb("../Report/ForwardBookingReport.jsp?command=Default&message=Defalut")');
+  fw_menu_17.addMenuItem("Cost Center Old  ","window.open('../Report/CostCenterReport.jsp?command=Default&message=Defalut', 'right');");
+  fw_menu_17.addMenuItem("Cost Center  ","window.open('../Report/CostCenterReportNew.jsp?command=Default&message=Defalut', 'right');");
+
+   fw_menu_17.bgImageUp="fwmenu10_169x21_up.gif";
+   fw_menu_17.bgImageOver="fwmenu10_169x21_over.gif";
+   fw_menu_17.fontWeight="bold";
+   fw_menu_17.hideOnMouseOut=true;
+	
+
+
+
+//  fw_menu_17.writeMenus();
+} // fwLoadMenus()
+
+//-->
+</script>
+
+<script language="JavaScript1.2" src="fw_menu.js"></script>
+<link href='Samyak/Samyakcss.css' rel=stylesheet type='text/css'>
+</head>
+<body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0" bgcolor="#ffffff"  scroll=yes >
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" HEIGHT="100%">
+<tr>
+<td></td>
+</tr>
+<tr>
+<td width='100%' height='85%'><IFRAME NAME="right" SRC="../right.html" WIDTH="100%" HEIGHT="100%" border=0 frameborder=0>
+	</IFRAME> 
+	
+</td>
+</tr>
+</table>
+
+
+<script type='text/javascript'>function Go(){return}</script>
+<script type='text/javascript' src='SinglePage_var.js'></script>
+<script type='text/javascript' src='menu13_compact.js'></script>
+
+</body>
+</html>
+
+
+
+
+

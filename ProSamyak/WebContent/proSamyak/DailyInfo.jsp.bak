@@ -1,0 +1,560 @@
+<%
+/*
+
+<!--
+----------------------------------------------------------------------------------------------------------------------------------------------------------- 
+Sr No ModifiedBy		Date		Status		Reasons
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+1		Anil			23-04-2011	Done		To Access on Server
+2		Lotan			27-06-2011	Done		Dispaly Save Record Message 
+3		Lotan			27-06-2011	Done		Version Control
+4   Chanchal		23/09/2011	Done	Daily note & Meta tag expires and auctocomplet off applied  cvd230911
+5 Chanchal 07/10/11 Notice for Project name standard
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-->
+*/
+
+%>
+
+<%@page language="java" import="java.sql.*,java.io.*,java.util.*,NipponBean.*" errorPage="errorpage.jsp"%>
+
+<jsp:useBean id="L" class="NipponBean.login"/>
+<jsp:useBean id="A" class="NipponBean.Array"/>
+<jsp:useBean id="format" scope="application" class="NipponBean.format"/>
+<jsp:useBean id="C" scope="application" class="NipponBean.Connect"/>
+<jsp:useBean id="AC" class="NipponBean.ArrayCSS"/>
+<jsp:useBean id="I" class="NipponBean.Inventory"/>
+<jsp:useBean id="G" class="NipponBean.GetDate"/>
+<jsp:useBean id="YED" class="NipponBean.YearEndDate"/>
+
+<!-- <link href='../Samyak/Samyakcss.css' rel=stylesheet type='text/css'> -->
+
+<%
+	String user_id= ""+ session.getValue("user_id");
+	//String user_level= ""+session.getValue("user_level");
+	String machine_name=request.getRemoteHost();
+	String query = "";
+	int errLine = 15;
+	java.sql.Date today_date = new java.sql.Date(System.currentTimeMillis());
+	java.sql.Date D = new java.sql.Date(System.currentTimeMillis());
+	//command=Default
+	int year=D.getYear();
+	int dd=D.getDate()+3;
+	int mm=D.getMonth();
+	java.sql.Date Dprevious = new java.sql.Date((year),(mm),dd);
+	String command=request.getParameter("command");
+	String message=request.getParameter("message");
+	String invoicedate=format.format(Dprevious);
+
+	Connection con=null;
+	Connection cong=null;
+
+	ResultSet rs_g=null;
+	//Statement stmt=null;
+	PreparedStatement pstmt=null;
+	PreparedStatement pstmt_g=null;
+	
+	//int sr1=0;
+	int counter = 0;
+	int i=0;
+
+try	
+{
+	cong=C.getConnection();
+	//System.out.println("Line Number 47 get	");
+}
+catch(Exception Samyak31)
+{ 
+	C.returnConnection(cong);
+	//System.out.println("Line Number 53 return ");
+	out.println("<br><font color=red> FileName : CgtReceive.jsp<br>Bug No Samyak31 : "+ Samyak31);
+}
+
+if("Default".equals(command))
+{
+	if(message!=null)
+		out.println("<center><font class='message1'> "+message+"</font></center>");
+	
+	try
+	{	
+		errLine = 34;
+		con=C.getConnection();
+		//System.out.println("Line Number 65 get");
+%>
+<SCRIPT LANGUAGE="JavaScript">
+/*function chk()
+	{
+		document.mainform.engineer_name.select();
+	}*/
+</SCRIPT>
+
+<script language="javascript">
+<%
+	String lotNoQuery = "Select engineerName from masterEngineer where Active=1 and CurrentActive=1 order by engineerName";
+		
+	pstmt_g = cong.prepareStatement(lotNoQuery, ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+	rs_g = pstmt_g.executeQuery();
+	String engArray = "";
+	
+	while(rs_g.next()) 	
+	{
+		if(rs_g.isLast())
+		{
+			engArray += "\"" +rs_g.getString("engineerName") +"\"";
+		}
+		else
+		{
+			engArray += "\"" +rs_g.getString("engineerName") +"\",";
+		}
+	}
+	pstmt_g.close();
+	//System.out.println("Line Number 94 pstmt_g closed engg_name	");
+	rs_g.close();
+	out.print("var engArray=new Array("+engArray+");");
+
+	String proQuery = "Select projectName from masterProject where Active=1 order by projectName";
+		
+	pstmt_g = cong.prepareStatement(proQuery, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+	rs_g = pstmt_g.executeQuery();
+	String proArray = "";
+	while(rs_g.next()) 	
+	{
+		if(rs_g.isLast())
+		{
+			proArray += "\"" +rs_g.getString("projectName") +"\"";
+		}
+		else
+		{
+			proArray += "\"" +rs_g.getString("projectName") +"\",";
+		}
+	}
+	pstmt_g.close();
+	//System.out.println("Line Number 115 pstmt_g closed proj_name	");
+	rs_g.close();
+	out.print("var proArray=new Array("+proArray+");");
+	
+%>
+</script>
+
+<html>
+<head> <title>Daily Form</title>
+
+	<script language="JavaScript" src="validate_title.js"></script>
+	<script language="JavaScript" src="focus.js"></script>
+	<SCRIPT language=javascript src="../Samyak/SamyakYearEndDate.js"> </script>
+	<script language="javascript" src="../Samyak/SamyakNewDate.js"></script>
+	<SCRIPT language=javascript src="../Samyak/Samyakmultidate.js"></script>
+	<SCRIPT language=javascript src="../Samyak/Samyakcalendar.js"></SCRIPT>
+	<SCRIPT LANGUAGE="JavaScript" SRC="../Samyak/lw_layers.js"></SCRIPT>
+	<SCRIPT LANGUAGE="JavaScript" SRC="../Samyak/lw_menu.js"></SCRIPT>
+	<script language=javascript src="../Samyak/common.js"></script>
+	<script language=javascript src="../Samyak/SamyakRestriction.js"></script>
+	<script language=javascript src="../Samyak/actb.js"></script>
+</head>
+
+<body  background="../Buttons/BGCOLOR.JPG" onLoad='document.mainform.todaysdate.select()'>
+	<form name=mainform method="post" action="DailyInfo.jsp">
+	
+	
+	
+	
+	<table border=1 borderColor=skyblue align=center cellspacing=0 cellpadding=2 align=center>
+	<tr><td>
+	<table>
+	<tr><td> <font color=blue>
+<Marquee><!-- Request to  Read Samyak Notice No 1 - Date 11 Oct 2011 <br> -->
+</marquee></font><td> </tr> 
+	<tr><td>
+	&nbsp;&nbsp<br> <font color=blue>
+
+ <br> 
+
+Do Visit, Give your feedback in proSamyak. (Project Name = esamyak.com)<br> 
+
+<a href="http://esamyak.com/new/" target=_blank> www.esamyak.com/new </a>
+
+
+<!--
+Notice 1 : Mandatory to reference Project Names in All Samyak-Internal communications and systems. <br>
+ 
+Communications: Email, Telephonic conversation, personal communications with fellow colleagues, etc. <br>
+
+Systems: Tomcat Instance, Eclipse files, Database Names, etc. <br>
+ 
+List of Project Names: Swasitk1112  , BlueBird1112 ,Apple  ,Samayk5.0  , SamyakAmbition  ,GemJp4.8Star ,SamyakVC2011 etc.<br>
+
+Note: <br>
+1. Casing must be maintained as per the list above. <br>
+2. Spaces (Leading/Trailing/Inline) are not to be used. <br>
+3. Usage of Project Names allows for brevity & clarity, & helps set the context of people involved. <br>
+
+<br>
+<br>
+<FONT SIZE="" COLOR="#330099">
+Chanchal Dagade<br>
+Mob 98196 72460<br>
+www.esamyak.com</FONT> <
+
+-->
+
+	</td></tr>
+	</table>
+	</td>
+	<td>
+	
+	 <table borderColor=blue border=0 WIDTH="100%" cellspacing=2 cellpadding=2>
+	 <tr bgcolor="skyblue">
+		<th colspan=4 align=center>Daily Update Form : </th>
+	 </tr>
+<tr><td colspan=2>
+&nbsp;&nbsp<br> <font color=blue>
+<!-- 
+Note -->
+<!--
+Request to fill , submit following data  in prosamyak in <br> Project Name -  HR Dept 
+Sub: Personal Data <br> 
+1> Full Name ,<bR> 2> Mob, 3> Resi Number with Std code, 9>Personal Email Id  <br> 
+4> Date of Birth, 5>Date of Joining  <br>
+6> Bank Name with Branch Name 8> Account Number  <br> --> </font>
+</td>
+</tr>
+
+
+
+     <tr><td><p>Given Date  : </td>
+		<td>
+		<input type="text" name="todaysdate" size="10" value=<%=format.format(today_date)%>  
+		onblur='getthefocus(document.mainform.engineer_name);
+		return  fnCheckMultiDate(this,"Date"); '
+		OnKeyUp="checkMe(this);" >
+		</td>
+     </tr>
+
+	<tr><td>Engineer Name : </td>
+		<td >
+		<input type=text name=engineer_name id=engineer_name value=""  size=15 autocomplete=off onBlur="return nullvalidation(this)"  ></td>
+		<script language="javascript">	
+				var companyobj = new  actb(document.getElementById('engineer_name'), engArray);	
+		</script>	
+	</tr>
+				
+	<tr><td>Project Name : </td>
+		<td>
+		<input type=text name=project_name id=project_name value=""  size=15 autocomplete=off onBlur='return nullvalidation(this)' ></td>
+		<script language="javascript">
+				var companyobj = new  actb(document.getElementById('project_name'), proArray);	
+		</script>	
+	</tr>
+
+	<tr><td><p>Assignment Title : </td>
+		<td><input type="text" name="title" size="30"></td>
+	</tr>
+
+	<tr><td><p>Assignment Description : </td>
+		<td><Textarea name="description" 
+		cols="30" rows="3"></Textarea> </td>
+	</tr>
+
+<tr>
+	<td><p>Assignment Type : </td>
+<%  
+	query = "select count(*) as counter from masterType";
+	pstmt = con.prepareStatement(query);
+		   rs_g = pstmt.executeQuery();
+		   while(rs_g.next())
+		   {
+			counter = rs_g.getInt("counter");
+		   }
+	pstmt.close();
+	//System.out.println("Line Number 189 pstmt_g closed assignment_type");
+	rs_g.close();
+   
+		   String atype1[]=new String[counter];
+		   String atypeid1[]=new String[counter];
+	query = "select typeId,typeName from masterType";
+	pstmt = con.prepareStatement(query);
+		   rs_g = pstmt.executeQuery();
+		   i=0;
+		   while(rs_g.next()) {
+  		   errLine=198;
+		   atypeid1[i]=rs_g.getString("typeId");	atype1[i]=rs_g.getString("typeName");
+		   i++;
+		   }
+	pstmt.close();
+	//System.out.println("Line Number 205 pstmt_g closed ");
+	rs_g.close();
+
+%>
+
+	<td><select name="atype" size=1>
+		<%for(int j=0;j<counter;j++) { errLine=207;%>
+		<option value=<%=atypeid1[j]%>> <%=atype1[j]%></option> <%}%>
+		</select>
+	</td>
+</tr>
+								
+<tr>
+<td><p>Priority : </td>
+<%							
+	query = "select count(*) as counter from masterPriority";
+	pstmt = con.prepareStatement(query);
+		rs_g = pstmt.executeQuery();
+		while(rs_g.next()) {
+		counter = rs_g.getInt("counter");
+		}
+	pstmt.close();
+	//System.out.println("Line Number 227 pstmt_g closed priority");
+	rs_g.close();
+	
+	String priority1[]=new String[counter];
+	String priorityid1[]=new String[counter];
+	
+	query = "select priorityId,priorityName from masterPriority";
+	pstmt = con.prepareStatement(query);
+		rs_g = pstmt.executeQuery();
+		i=0;
+		while(rs_g.next()) {
+		errLine=237;
+		priorityid1[i]=rs_g.getString("priorityId");
+		priority1[i]=rs_g.getString("priorityName");
+		i++;
+		}
+	pstmt.close();
+	//System.out.println("Line Number 244 pstmt_g closed priorityId");
+	rs_g.close();
+%>
+
+	<td><select name="priorityname" size=1>
+		<%for(int j=0;j<counter;j++){
+		errLine=246;%>
+		<option value=<%=priorityid1[j]%>><%=priority1[j]%></option>
+		<%}%>
+		</select>
+	</td>
+</tr>
+
+<tr>	<!--  <-stockdate -->  
+	<td><script language='javascript'>
+	if (!document.layers) 
+	{
+	document.write("<input type=button class='button1' onclick='popUpCalendar(this, mainform.stockdate, \"dd/mm/yyyy\")' onmouseover=\"this.className='datebtn_over';\" onmouseout=\"this.className='datebtn';\" value='Target Date' style='font-size:11px ; width:100'>")}
+		</script> 
+	</td>
+	
+	<td align=left> 
+	<input type=text class="ipstock" name='stockdate' size=8 maxlength=10 value="<%=format.format(format.getDate(invoicedate))%>"
+	onblur='return  fnCheckMultiDate(this,"Date")' OnKeyUp="checkMe(this);">	
+	</td>
+</tr>		
+							
+<!-- <tr>	<td> <p>Completed Date : </td>
+			<td> <%//= L.date(D,"dd3","mm3","yy3")%> </td>
+     </tr>
+-->
+
+<tr> <td>	<p>Work Status : </td>
+	 </td>
+<%																	
+	query = "select count(*) as counter from masterStatus";
+	pstmt = con.prepareStatement(query);
+			rs_g = pstmt.executeQuery();
+			while(rs_g.next()) {
+			errLine=291;
+			counter = rs_g.getInt("counter");
+			}
+	pstmt.close();
+	//System.out.println("Line Number 227 pstmt_g closed masterStatus");
+	rs_g.close();
+
+	String status1[]=new String[counter];
+	String statusid1[]=new String[counter];
+
+	query = "select statusId,statusName from masterStatus";
+	pstmt = con.prepareStatement(query);
+	 		rs_g = pstmt.executeQuery();
+	 		i=0;
+	 		errLine=303;
+			while(rs_g.next())	{
+			statusid1[i]=rs_g.getString("statusId");
+			status1[i]=rs_g.getString("statusName");
+			i++;
+			errLine=309;
+			}
+	pstmt.close();
+	//System.out.println("Line Number 227 pstmt_g closed statusId");
+	rs_g.close();
+%>
+	
+	<td>	<select name="statusname" size=1>
+			<%for(int j=0;j<counter;j++){%>
+			<option value=<%=statusid1[j]%>><%=status1[j]%></option>
+			<%}%> </select>
+	</td>
+</tr>
+							
+<%	errLine=322;
+	C.returnConnection(cong);
+	//System.out.println("Line Number 301 return cong");
+	C.returnConnection(con);
+	//System.out.println("Line Number 303 return con");
+	}catch(Exception e)
+	{
+	C.returnConnection(cong);
+	//System.out.println("Line Number 308 return cong");
+	C.returnConnection(con);
+	//System.out.println("Line Number 306 return");
+	out.print("Error Found!!!!!!!!!!!!"+e+" ErrLine="+errLine);
+}%>
+
+<tr>
+	<td colspan=4><hr></td>
+</tr>
+
+<tr>
+	<td colspan=2 align="center">								
+	<input type="submit" name="command" value="Save" style="height:25px; width:80px; background:#D3D5A8; font-size:16" onClick="return validate_title()">
+</tr>
+</table>
+</table>
+
+		
+<%} 
+if("Save".equals(command))
+{
+try
+{
+	//System.out.print("pramod");
+	//System.out.println(request.getParameter("engineer_name"));
+	errLine=348;
+	con=C.getConnection();
+//System.out.println("Line Number 331 get");
+	//java.sql.Date date1=new java.sql.Date(request.getParameter("todaysdate"));
+	//System.out.print("Under Loop--->");
+	//String date11 = today_date;
+	String date11 = request.getParameter("todaysdate");
+	StringTokenizer st1=new StringTokenizer(date11,"/");
+	int d22 = Integer.parseInt(st1.nextToken());
+	int m22 = Integer.parseInt(st1.nextToken());
+	int y22 = Integer.parseInt(st1.nextToken());
+	java.sql.Date Newdate =new java.sql.Date((y22-1900),m22-1,d22);
+
+	
+	String date12 = request.getParameter("stockdate");
+	StringTokenizer st2=new StringTokenizer(date12,"/");
+	int d11 = Integer.parseInt(st2.nextToken());
+	int m11 = Integer.parseInt(st2.nextToken());
+	int y11 = Integer.parseInt(st2.nextToken());
+	java.sql.Date sdate =new java.sql.Date((y11-1900),m11-1,d11);
+//System.out.print(sdate);
+
+	String ename="";
+	String pname="";
+
+	String enQuery = "Select engineerId,engineerName from masterEngineer where Active=1 and engineerName like '"+request.getParameter("engineer_name")+"'";
+	out.print("<br>enQuery="+enQuery);
+
+	errLine=394;
+	
+	pstmt_g = con.prepareStatement(enQuery, ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+		rs_g = pstmt_g.executeQuery();
+		errLine=397;
+		i = 0;
+		while(rs_g.next())	{
+			ename =rs_g.getString("engineerId");
+			i++;	
+		}
+	pstmt_g.close();
+
+	rs_g.close();
+	
+	if(i==0)
+response.sendRedirect("DailyInfo.jsp?command=Default&message= <b><font size=4 color='red'>engineer name Record not found</font></b>.");
+
+String pnQuery = "Select projectId,projectName from masterProject where Active=1 and projectName like '"+request.getParameter("project_name")+"'";
+		
+	pstmt_g = con.prepareStatement(pnQuery, ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
+		rs_g = pstmt_g.executeQuery();
+		i = 0;
+		while(rs_g.next()) 	{
+		pname =rs_g.getString("projectId");
+		i++;	
+		}
+	pstmt_g.close();
+	rs_g.close();
+
+	if(i==0)
+		response.sendRedirect("DailyInfo.jsp?command=Default&message=<b><font size=4 color='red'>Project name Record not found</font></b>");
+	pstmt_g.close();
+	rs_g.close();
+
+	errLine=371;
+	//System.out.println("Under try in File");
+	String title=request.getParameter("title");
+	String description=request.getParameter("description");
+	String atype = request.getParameter("atype");
+	String priorityname = request.getParameter("priorityname");
+	String statusname=request.getParameter("statusname");
+	
+	errLine=399;
+	//System.out.println(pname);
+	//System.out.println(ename);
+	//System.out.println(statusname);
+
+	String assignmentId= ""+L.get_master_id(con,"assignmentTransaction");
+		errLine=403;
+	
+	pstmt=con.prepareStatement("Insert into assignmentTransaction (assignmentId,assignmentName,assignmentDescription,projectId,engineerId,startedOn,targetedOn,statusId,typeId,priorityId,modifiedOn,modifiedBy,modifiedMachineName,active) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+		errLine=406;
+		pstmt.setString(1,assignmentId);
+		pstmt.setString(2,title);
+		pstmt.setString(3,description);
+		pstmt.setString(4,pname);
+		errLine=411;
+		pstmt.setString(5,ename);
+		pstmt.setDate(6,Newdate);
+		pstmt.setDate(7,sdate);
+		pstmt.setString(8,statusname);
+		//pstmt.setString(9,assignmentId);
+
+	errLine=417;
+	//pstmt.setString(10,assignmentId);
+	//pstmt.setString(11,assignmentId);
+	//pstmt.setString(12,assignmentId);
+	pstmt.setString(9,atype);
+	
+	errLine=422;
+	pstmt.setString(10,priorityname);
+	//pstmt.setString(15,assignmentId);
+		pstmt.setDate(11,Newdate);
+		pstmt.setString(12,user_id);
+	
+	errLine=427;
+	pstmt.setString(13,machine_name);
+	pstmt.setString(14,"true");
+	//pstmt.setString(20,assignmentId);
+	
+	errLine=431;
+
+	int a=pstmt.executeUpdate();
+pstmt.close();
+rs_g.close();
+	
+	C.returnConnection(cong);
+	C.returnConnection(con);
+	//System.out.print("477="+a);
+	response.sendRedirect("DailyInfo.jsp?command=Default&message=<b><font size=3 color='red'> Record Added Successfully</font></b>");
+
+}
+catch(Exception e)
+{
+C.returnConnection(cong);
+C.returnConnection(con);
+//System.out.println("Line Number 443 return");
+out.print("Error Occured!!!!!!!!!!!! at "+errLine+" is "+e);
+}
+}%>
+</form>
+</body>
+</html>
+
+

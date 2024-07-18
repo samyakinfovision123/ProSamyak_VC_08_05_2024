@@ -1,0 +1,95 @@
+
+
+%>
+if((document.DefaultForm.amount<%=i%>.value=="0")||(document.DefaultForm.amount<%=i%>.value=="")){
+<%
+out.print("document.DefaultForm.amount"+i+".value=(document.DefaultForm.quantity"+i+".value) * (document.DefaultForm.rate"+i+".value);");
+//out.print("subtotal=parseFloat(subtotal)+parseFloat(document.DefaultForm.amount"+i+".value);");
+%>
+}
+if(document.DefaultForm.rate<%=i%>.value=="0"){
+<%
+//out.print("}if(document.defaultForm.rate"+i+".value==""0""){");
+out.print("document.DefaultForm.rate"+i+".value=(document.DefaultForm.amount"+i+".value) / (document.DefaultForm.quantity"+i+".value);");
+//out.print("subtotal=parseFloat(subtotal)+parseFloat(document.DefaultForm.amount"+i+".value);");
+%>
+}
+if(document.DefaultForm.amount<%=i%>.value != ((document.DefaultForm.quantity<%=i%>.value)*(document.DefaultForm.rate<%=i%>.value)))
+{
+if(document.DefaultForm.amount<%=i%>.value > ((document.DefaultForm.quantity<%=i%>.value)*(document.DefaultForm.rate<%=i%>.value))) {
+<%
+out.print("document.DefaultForm.rate"+i+".value=(document.DefaultForm.amount"+i+".value) / (document.DefaultForm.quantity"+i+".value);");
+
+//out.print("subtotal=parseFloat(subtotal)+parseFloat(document.DefaultForm.amount"+i+".value);");
+%>
+}
+else{
+<%	out.print("document.DefaultForm.amount"+i+".value=(document.DefaultForm.quantity"+i+".value) * (document.DefaultForm.rate"+i+".value);");
+//out.print("subtotal=parseFloat(subtotal)+parseFloat(document.DefaultForm.amount"+i+".value);");
+%>
+}
+
+}//if
+
+<%
+out.print("subtotal=parseFloat(subtotal)+parseFloat(document.DefaultForm.amount"+i+".value);");
+
+}//end for 
+%>
+
+
+
+
+
+
+
+
+
+
+
+
+%>
+if((document.ADDForm.amount<%=i%>.value=="0")||(document.ADDForm.amount<%=i%>.value=="")){
+<%
+out.print("document.ADDForm.amount"+i+".value=(document.ADDForm.quantity"+i+".value) * (document.ADDForm.rate"+i+".value);");
+out.print("subtotal=parseFloat(subtotal)+parseFloat(document.ADDForm.amount"+i+".value);");
+%>
+}
+if(document.ADDForm.rate<%=i%>.value=="0"){
+<%
+//out.print("}if(document.defaultForm.rate"+i+".value==""0""){");
+out.print("document.ADDForm.rate"+i+".value=(document.ADDForm.amount"+i+".value) / (document.ADDForm.quantity"+i+".value);");
+//out.print("subtotal=parseFloat(subtotal)+parseFloat(document.ADDForm.amount"+i+".value);");
+%>
+}
+if(document.ADDForm.amount<%=i%>.value != ((document.ADDForm.quantity<%=i%>.value)*(document.ADDForm.rate<%=i%>.value)))
+{
+if(document.ADDForm.amount<%=i%>.value > ((document.ADDForm.quantity<%=i%>.value)*(document.ADDForm.rate<%=i%>.value))) {
+<%
+out.print("document.ADDForm.rate"+i+".value=(document.ADDForm.amount"+i+".value) / (document.ADDForm.quantity"+i+".value);");
+
+//out.print("subtotal=parseFloat(subtotal)+parseFloat(document.ADDForm.amount"+i+".value);");
+%>
+}
+else{
+<%	out.print("document.ADDForm.amount"+i+".value=(document.ADDForm.quantity"+i+".value) * (document.ADDForm.rate"+i+".value);");
+//out.print("subtotal=parseFloat(subtotal)+parseFloat(document.ADDForm.amount"+i+".value);");
+%>
+}
+
+}//if
+
+<%
+out.print("subtotal=parseFloat(subtotal)+parseFloat(document.ADDForm.amount"+i+".value);");
+}//end for
+%>
+
+
+
+
+
+
+
+
+
+

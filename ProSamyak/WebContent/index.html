@@ -1,0 +1,136 @@
+<!-- 
+1  Anil 				23-04-2011		Done 			First Version of Prosamyak 1.1.1
+2  Anil 				26-04-2011		Done 			Second Version of Prosamyak 1.2.2
+3 Chanchal		23/09/2011		Done			Meta tag expires and auctocomplet off applied cvd230911
+4 Rakesh			04/12/2012		Done			Today migrate version from Tomcat5 to Tomcat7
+ -->
+<html>
+<head>
+	<title>Samyak Software - India</title>
+	<meta http-equiv="expires" content="tue, 20 oct 1998 23:00: gmt">
+	<meta http-equiv="content-type" content="text/html; charset=iso-8859-1">
+	<meta name="generator" content="coreldraw11">
+	<meta name="date" content="11/01/2004">
+	<link href='samyak/styles.css' rel=stylesheet type='text/css'>
+
+
+<script language=javascript>
+function validate()
+{
+ if(document.login.user_name.value=="")
+	{
+	 alert(" Please Enter User Name");
+	  document.login.user_name.focus();
+	 return false;
+	}
+	else
+	{
+	  if(document.login.user_pass.value=="")
+		{
+	    alert(" Please Enter Password");
+   	    document.login.user_pass.focus();
+		return false;
+		}
+	return true;	
+	}
+ }
+
+ function pselect(name)
+ {
+ 	document.login.user_pass.select();
+ }
+
+  function uselect(name)
+ {
+ 	document.login.user_name.select();
+ }
+
+</script>
+</HEAD>
+<body  link=blue Alink=blue vlink=blue scroll=no background='Apple_Final.jpg' style="margin:0px" >
+<table border=0 cellpadding =0 cellspacing=0 bordercolor=green width='100%' height='100%' align=center > 
+<tr  height='10%'><td valign=top><img name="Untitled1" src="top_sparkler.jpg" width="1000" border="0" height=100></td></tr>
+<tr>
+<td>
+<table border=0 cellpadding =0 cellspacing=0 bordercolor=red width='100%' height='100%'> 
+<tr height='37%'><td>&nbsp;</td></tr>
+
+<tr>
+<td width='30%' height='80%'>
+<table border=0 cellpadding =0 cellspacing=0 bordercolor=yellow height='100%' width='100%'> 
+<tr>
+
+<td >&nbsp;</td></tr>
+
+</table>
+</td>
+<td width='70%' valign=top align=center>
+<table border=0 cellpadding =0 cellspacing=0 bordercolor=red width='100%'> 
+<FORM ACTION="indexSparkler.jsp" name=login method=post target=_blank onsubmit='window.close()' autocomplete=off>
+<!-- cvd230911 -->
+<TR>
+<th  align=right width='25%'>
+<font color=white>
+<b>User Name:</b>
+</th>
+<td>
+<INPUT type="text" name="user_name" maxlength="20" class="textbox" size="15" 
+maxlength="15" onFocus="this.select();" value="Samyak" autocomplete=off>
+</td>
+</TR>
+<TR>
+<td class='White' align=right width='25%'>
+<font color=white><b>Password:</b></font>
+</td>
+<TD>
+<INPUT type="password" maxlength="20" name="user_pass" class="textbox" maxlength="15" size="15" onFocus="this.select()">
+</TD>
+</TR>
+<tr>
+<th  align=right width='25%'></th>
+<td align=left>
+<INPUT type="SUBMIT" value="LOGIN" name="command" class="subres" onMouseOut="this.className='subres';" 
+onMouseOver="this.className='subres1';" onClick="return(validate())">
+</TD></tr>
+
+</table>
+<tr >
+	<td colspan=2 valign=bottom>
+	<table border=0 cellpadding =0 cellspacing=0 bordercolor=red width='100%' > 
+	<tr>
+	<th>Version - proSamyak 1.1.1 (04 Dec 2012) </th>
+	</tr>
+	<tr>
+	<th>
+
+	<a href="http://www.eSamyak.com" target=_blank>www.eSamyak.com </a> </td>
+</tr>
+
+<tr>
+<th  >
+
+copyright © 2005-2006, Samyak Software, India.
+</th>
+
+
+
+<tr >
+	 <th  >
+
+	 All Rights Reserved.</th>
+</tr>
+</TABLE>
+
+</td>
+
+
+</TABLE>
+</FORM>
+</td></tr>
+</td>
+</tr>
+</TABLE>
+
+</BODY>
+
+</HTML>

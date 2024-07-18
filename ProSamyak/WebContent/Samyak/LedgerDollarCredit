@@ -1,0 +1,56 @@
+<!-- 
+use of systemrun for Updating the Dollar Ledger opening balance in Ledger table.
+
+type the url in the browser 
+Nippon/Samyak/LedgerDollarCredit.jsp?command=Samyak06
+-->
+
+
+
+<%@ page language="java" import="java.io.*,java.sql.*,java.util.*,NipponBean.*" errorPage="errorpage.jsp"%>
+
+<jsp:useBean id="L" class="NipponBean.login"/>
+<jsp:useBean id="A" class="NipponBean.Array"/>
+<jsp:useBean id="C" class="NipponBean.Connect"/>
+
+<%
+String errLine="18";
+Connection cong = null;
+Connection conp = null;
+
+try{
+
+if(command.equals("Samyak06")){
+
+	ResultSet rs_g= null;
+    PreparedStatement pstmt_g=null;
+    PreparedStatement pstmt_p=null;
+	conp=C.getConnection();
+	cong=C.getConnection();
+	errLine="37";
+	
+
+out.print("<br>System Run Started...");
+
+String query="Select count(*) as counter from Financial_Transaction FT ,Voucher V where V.Voucher_Date < ? and V.Active=1 and V.Voucher_Id=FT.Voucher_Id and Ft.Local_Amount>0 and FT.Active=1"; 
+//out.print("<br> After Query =" +query);
+pstmt_g = cong.prepareStatement(query);
+
+rs_g = pstmt_g.executeQuery();	
+int counter=0;
+while(rs_g.next()) 
+{
+counter=rs_g.getInt("counter");
+}
+out.print("<br>50 counter ="+counter);
+pstmt_g.close();
+
+
+}//if command equals samyak06
+}catch(Exception e){
+	C.returnConnection(cong);
+	C.returnConnection(conp);
+	out.println("Exception at Line "+errLine+" bug is :"+e);
+}//eo catch
+%>
+		  
